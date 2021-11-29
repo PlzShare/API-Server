@@ -1,0 +1,102 @@
+# active spring boot profile
+spring:
+   profiles:
+      active: dev
+---
+
+# common - spring configuration
+spring:
+
+   # devtools - live reload
+   devtools:
+      livereload:
+         enabled: true
+
+
+   # message resource(Internationalization)
+   messages:
+      always-use-message-format: true
+      basename: messages/messages_ko
+      encoding: utf-8
+
+   # multipart
+   servlet:
+      multipart:
+         enabled: true
+         max-file-size: 50MB
+         max-request-size: 50MB
+
+   # aop(@EnableAspectJAutoProxy)
+   aop:
+      auto: true
+      proxy-target-class: true 
+---
+
+# server
+server:
+   port: 8080
+   servlet:
+     context-path: /
+     encoding:
+        charset: utf-8
+        enabled: true
+        force: false
+        force-request: false
+        force-response: false
+---
+
+# mybatis
+mybatis:
+   config-location: classpath:mybatis/configuration.xml
+
+
+---
+
+# logging
+logging:
+   config: classpath:logback.xml 
+
+---
+# custom property
+fileupload:
+   urlBasePath: /images
+   fileSaveBasePath: /upload-images
+   resourceMapping: ${fileupload.urlBasePath}/**
+   fileUploadLocation: file:${fileupload.fileSaveBasePath}/
+
+---
+
+# dev profile - spring boot configuration
+
+spring:
+   config:
+      activate:
+         on-profile: dev
+      
+   # datasource
+   datasource:
+      username: webdb
+
+      password: webdb
+      driver-class-name: org.mariadb.jdbc.Driver
+      url: jdbc:mysql://127.0.0.1:3306/weboard?characterEncoding=utf8
+      hikari:
+         minimum-idle: 20
+         maximum-pool-size: 40
+
+---
+# production profile - spring boot configuration
+spring:
+   config:
+      activate:
+         on-profile: production
+
+   # datasource
+   datasource:
+      username: weboard
+      password: weboard
+      driver-class-name: org.mariadb.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/webdb?characterEncoding=utf8
+      hikari:
+         minimum-idle: 100
+         maximum-pool-size: 200
