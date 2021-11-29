@@ -10,8 +10,11 @@ public class TestController {
 	@GetMapping("/test")
 	public String test() {
 		User user = User.builder()
-						.nickname(null).id(null).password(null).build();
-	
+						.nickname(null)
+						.id(null)
+						.password(null)
+						.build();
+		
 		return "test";
 	}
 }
