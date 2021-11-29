@@ -50,7 +50,7 @@
 	<!--
 		com.douzone.logex2 아래 패키지 로그들만  \logex\logex2.log 파일에만  출력하는 로거
 	-->
-	<logger name="com.douzone.mysite.advice" level="warn" additivity="false">
+	<logger name="com.douzone.weboard.advice" level="warn" additivity="false">
             <appender-ref ref="fileAppender2" />
 			<appender-ref ref="consoleAppender" />
     </logger>
