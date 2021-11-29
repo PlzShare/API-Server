@@ -14,7 +14,7 @@ public class TestController {
 						.id(null)
 						.password(null)
 						.build();
-	
+
 		return "test";
 	}
 }
