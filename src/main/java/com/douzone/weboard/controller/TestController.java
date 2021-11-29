@@ -9,7 +9,12 @@ import com.douzone.weboard.vo.User;
 public class TestController {
 	@GetMapping("/test")
 	public String test() {
-		User user = new User();
+		// User user = new User();
+		User user = User.builder()
+						.nickname(null)
+						.id(null)
+						.password(null)
+						.build();
 	
 		return "test";
 	}
