@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="workspace">
+
+	<select id="findAll" parameterType="long" resultType="workspaces">
+		<![CDATA[
+		select no, name, created_at, user_no
+		from workspace
+		where user_no = #{userNo};
+		]]>
+	</select>
+	
+	<insert id="insert" parameterType="workspaces">
+		<![CDATA[
+		insert into workspace(name, user_no)
+		values(#{name}, #{userNo});
+		]]>
+	</insert>
+	
+	<select id="findInsertOne" parameterType="workspaces" resultType="long">
+		<![CDATA[
+		select last_insert_id() as workspace;
+		]]>
+	</select>
+
+	<insert id="update" parameterType="workspaces">
+		<![CDATA[
+		update workspace
+		set name = #{name}, created_at = #{createdAt}
+		where no = #{userNo};
+		]]>
+	</insert>
+		
+	<delete id="delete" parameterType="long">
+		<![CDATA[
+		delete from workspace
+		where no = #{no}
+		]]>
+	</delete>
+			
+	<select id="search" parameterType="map" resultType="workspaces">
+		<if test='searchType == "name"'>
+			<![CDATA[
+			select no, name, created_at, user_no
+			from workspace
+			where name like #{keyword};
+			]]>
+		</if>
+
+		<if test='searchType == "id"'>
+			<![CDATA[
+			select b.no as no, b.name as name, b.created_at as createAt, b.user_no as userNo
+			from user a join workspace b on a.no = b.user_no
+			where id like #{keyword};
+			]]>	
+		</if>
+	</select>
+</mapper>

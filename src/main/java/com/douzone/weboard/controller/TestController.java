@@ -21,10 +21,10 @@ public class TestController {
    @GetMapping("/test")
    public ResponseEntity<User> test() {
       User user = User.builder()
-                  .nickname("test")
-                  .id("JDK")
-                  .password("1234")
-                  .build();
+              .nickname("test")
+              .id("JDK")
+              .password("1234")
+              .build();
       return new ResponseEntity<User>(user, HttpStatus.OK); // 리턴 여러개로 정상동작 / 오류동작으로 분기
       
    }
