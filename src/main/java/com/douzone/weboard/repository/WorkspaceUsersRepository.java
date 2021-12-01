@@ -1,13 +1,10 @@
 package com.douzone.weboard.repository;
 
 import java.util.HashMap;
-import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import com.douzone.weboard.vo.Workspaces;
 
 @Repository
 public class WorkspaceUsersRepository {
@@ -18,6 +15,17 @@ public class WorkspaceUsersRepository {
 	public boolean invite(HashMap<String, Long> map) {
 		int count = sqlSession.insert("workspace_users.invite", map);
 		return count == 1;
-	}	
+	}
+
+	public boolean leave(HashMap<String, Long> map) {
+		int count = sqlSession.update("workspace_users.leave", map);
+		return count == 1;
+	}
+	
+	public boolean changeRole(HashMap<String, Long> map) {
+		int count = sqlSession.update("workspace_users.changeRole", map);
+		return count == 1;
+	}
+	
 
 }

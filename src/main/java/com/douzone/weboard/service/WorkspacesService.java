@@ -30,7 +30,7 @@ public class WorkspacesService {
 		HashMap<String, Long> map = new HashMap<>();
 		map.put("userNo", workspace.getUserNo());
 		map.put("workspaceNo", workspaceNo);
-		map.put("user", 0L); // 워크스페이스 생성자면 0, 초대받은 유저는 1
+		map.put("userRole", 0L); // 워크스페이스 생성자면 0L, 초대받은 유저는 1L
 		
 		workspaceUsersRepository.invite(map);
 	}	

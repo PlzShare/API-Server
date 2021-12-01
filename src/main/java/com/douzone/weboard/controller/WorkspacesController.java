@@ -20,7 +20,7 @@ import com.douzone.weboard.vo.Workspaces;
 @RestController // responsebody 다 붙어진 효과
 @RequestMapping("/workspaces")
 public class WorkspacesController {
-	
+
 	@Autowired
 	private WorkspacesService workspacesService;
 	
@@ -36,6 +36,7 @@ public class WorkspacesController {
 	
 	@PostMapping("/insert")
 	public ResponseEntity<ApiResult> insert(){
+		// 워크스페이스 관리자가 워크스페이스 추가 가능
 		Workspaces workspace = Workspaces.builder()
 				.name("DB_insert_test1")
 		        .userNo(1L)
@@ -47,7 +48,6 @@ public class WorkspacesController {
 	@PutMapping("/update")
 	public ResponseEntity<ApiResult> update(){
 		// 워크스페이스 관리자가 워크스페이스 수정 가능
-		// 일반 사용자는 수정 불가
 		Workspaces workspace = Workspaces.builder()
 				.name("DB_update_test1")
 		        .userNo(3L)
@@ -59,7 +59,6 @@ public class WorkspacesController {
 	@DeleteMapping("/delete")
 	public ResponseEntity<ApiResult> delete(){
 		// 워크스페이스 관리자가 워크스페이스 삭제 가능
-		// 일반 사용자는 삭제 불가
 		Long test_workspaceNo = 2L;
 		workspacesService.delete(test_workspaceNo);
 		return new ResponseEntity<ApiResult>(HttpStatus.OK);
@@ -79,7 +78,7 @@ public class WorkspacesController {
 		map.put("keyword", "%" + test_keyword + "%");
 		map.put("searchType", test_searchType);
 		
-		System.out.println(workspacesService.search(map));
+		workspacesService.search(map);
 		return new ResponseEntity<ApiResult>(HttpStatus.OK);
-	}	
+	}
 }
