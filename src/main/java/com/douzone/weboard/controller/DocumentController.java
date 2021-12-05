@@ -28,9 +28,9 @@ public class DocumentController {
 	private final DocumentService documentService;
 	
 	@GetMapping("")
-	public ResponseEntity<ApiResult> getList(@PathVariable("chNo") Long channelNo, @RequestBody(required = false) Document document){
-		document.setChannelNo(channelNo);		
-		return new ResponseEntity<ApiResult>(ApiResult.success(documentService.findAll(document)), HttpStatus.OK);
+	public ResponseEntity<ApiResult> getList(@PathVariable("chNo") Long channelNo, @RequestBody Optional<Document> document){
+		
+		return new ResponseEntity<ApiResult>(ApiResult.success(documentService.findAll(document.orElse(new Document()))), HttpStatus.OK);
 	}
 	
 	@GetMapping("/{docNo}")
