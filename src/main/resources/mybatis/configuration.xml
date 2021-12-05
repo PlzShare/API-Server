@@ -6,13 +6,13 @@
 		<setting name="mapUnderscoreToCamelCase" value="true"/>
 	</settings>
 	<typeAliases>
+		<typeAlias type="com.douzone.weboard.vo.Document" alias="document"/>
 	<!-- 
-		<typeAlias type="com.douzone.mysite.vo.GuestBookVo" alias="GuestBookVo"/>
 	 -->
 	</typeAliases>
 	<mappers>
+		<mapper resource="mybatis/mappers/document.xml" />
 	<!-- 
-		<mapper resource="mybatis/mappers/guestbook.xml" />
 	 -->
 	</mappers>
 </configuration>
