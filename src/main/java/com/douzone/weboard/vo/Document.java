@@ -19,7 +19,7 @@ public class Document {
 	private String contents;
 	private String createdAt;
 	private String updatedAt;
-	private boolean isPinned;
+	private Boolean isPinned;
 	private Long userNo;
 	private Long channelNo;
 }

@@ -1,15 +1,18 @@
 package com.douzone.weboard.repository;
 
-import org.apache.ibatis.session.SqlSession;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+import java.util.Optional;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
-
-import lombok.RequiredArgsConstructor;
-
+import com.douzone.weboard.vo.Document;
 
 @Repository
-@RequiredArgsConstructor
-public class DocumentRepository {
-	private final SqlSession sqlSession;
-
+@Mapper
+public interface DocumentRepository {
+	public boolean insert(Document document);
+	public boolean update(Document document);
+	public boolean delete(Long no);
+	public Optional<Document> find(Long no);
+	public List<Document> findAll(Document document);
 }
