@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="channel">
+	<select id="findAll" parameterType="Long" resultType="channel">
+		<![CDATA[
+			select no, name, `desc`, created_at, workspace_no from channel where workspace_no=#{wno };
+		]]>
+	</select>
+	
+	<insert id="insert" parameterType="channel" useGeneratedKeys="true" keyProperty="no">
+		<![CDATA[
+			insert into channel (name, `desc`, workspace_no) 
+				values (#{name }, #{desc }, #{workspaceNo })
+		]]>
+	</insert>
+	
+	<delete id="delete" parameterType="channel">
+		<![CDATA[
+			delete from channel where no= #{no }
+		]]>
+	</delete>
+	
+	<update id="update" parameterType="channel">
+		update channel
+		set 
+			created_at = created_at
+			<if test="name != null">
+				, name = #{name }
+			</if>
+			<if test="desc != null">
+				,`desc`= #{desc }
+			</if>
+			<if test="workspaceNo != null">
+				,workspace_no = #{workspaceNo }
+			</if>
+		where no=#{no }	
+	</update>
+</mapper>

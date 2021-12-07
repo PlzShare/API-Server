@@ -2,17 +2,17 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+
 	<settings>
-		<setting name="mapUnderscoreToCamelCase" value="true"/>
-	</settings>
+      <setting name="mapUnderscoreToCamelCase" value="true"/>
+   </settings>
 	<typeAliases>
-	<!-- 
-		<typeAlias type="com.douzone.mysite.vo.GuestBookVo" alias="GuestBookVo"/>
-	 -->
+		<typeAlias type="com.douzone.weboard.vo.Channel" alias="channel"/>
+		<typeAlias type="com.douzone.weboard.vo.Noti" alias="noti"/>
+		<typeAlias type="com.douzone.weboard.vo.NotiUser" alias="notiuser"/>
 	</typeAliases>
 	<mappers>
-	<!-- 
-		<mapper resource="mybatis/mappers/guestbook.xml" />
-	 -->
+		<mapper resource="mybatis/mappers/channels.xml" />
+		<mapper resource="mybatis/mappers/noti.xml" />
 	</mappers>
 </configuration>
