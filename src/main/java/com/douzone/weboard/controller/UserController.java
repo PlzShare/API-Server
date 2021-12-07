@@ -67,7 +67,7 @@ public class UserController {
 	
 	// 회원탈퇴
 	@DeleteMapping("/{userNo}")
-	public ResponseEntity<ApiResult> delete( @PathVariable Long userNo){
+	public ResponseEntity<ApiResult> delete(@PathVariable Long userNo){
 	
 		userService.delete(userNo);
 		

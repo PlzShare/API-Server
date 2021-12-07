@@ -15,6 +15,7 @@ import com.douzone.weboard.vo.User;
 
 @RestController   // responsebody 안적어줘도된다. 
 public class TestController {
+	
 	@GetMapping("/test")
 	public ResponseEntity<ApiResult> test() {
 		User user = User.builder()
