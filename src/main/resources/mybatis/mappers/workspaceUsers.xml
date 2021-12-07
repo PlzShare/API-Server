@@ -23,20 +23,28 @@
 		</if>
 		<if test='user != 0'>
 			<![CDATA[
-			update workspace_user set reg_date = now() where user_no = #{userNo} and workspace_no = #{workspaceNo};
+			update workspace_user set reg_date = now()
+			where user_no = #{userNo}
+			  and workspace_no = #{workspaceNo};
 			]]>
 		</if>
 	</update>
 	
-	<update id="changeRole" parameterType="map">
-		<![CDATA[
-		update workspace_user set role = 'admin'
-		where role = 'user' and user_no = #{userNo} and workspace_no = #{workspaceNo}
-		]]>
-		
+	<update id="changeRoleUA" parameterType="map">
 		<![CDATA[
 		update workspace_user set role = 'user'
-		where role = 'admin' and user_no = #{adminNo} and workspace_no = #{workspaceNo};
+		where role = 'admin'
+		  and user_no = #{adminNo}
+		  and workspace_no = #{workspaceNo}
 		]]>
-	</update>	
+	</update>
+	
+	<update id="changeRoleAU" parameterType="map">
+		<![CDATA[
+		update workspace_user set role = 'admin'
+		where role = 'user'
+		  and user_no = #{userNo}
+		  and workspace_no = #{workspaceNo}
+		]]>
+	</update>
 </mapper>

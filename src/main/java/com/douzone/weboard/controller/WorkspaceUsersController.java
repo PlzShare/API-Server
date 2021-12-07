@@ -56,12 +56,17 @@ public class WorkspaceUsersController {
 	@PutMapping("/change-role")
 	public ResponseEntity<ApiResult> changeRole(){
 		
-		Long testAdminNo = 1L;
-		Long testUserNo = 2L;
+		Long testAdminNo = 2L;
+		Long testUserNo = 1L;
+		Long testWorkspaceNo = 3L;
+		
 		HashMap<String, Long> map = new HashMap<>();
 		map.put("adminNo", testAdminNo);
 		map.put("userNo", testUserNo);
+		map.put("workspaceNo", testWorkspaceNo);
+		
 		workspaceUsersService.changeRole(map);
+		
 		return new ResponseEntity<ApiResult>(HttpStatus.OK);
 	}
 }
