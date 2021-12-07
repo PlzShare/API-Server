@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.douzone.weboard.repository.DocumentRepository">
+	<insert id="insert" parameterType="document" useGeneratedKeys="true" keyProperty="no">	
+		insert into document(title, contents, user_no, channel_no) values(#{title},#{contents},#{userNo}, #{channelNo})
+	</insert>
+	
+	<delete id="delete" parameterType="long">
+		delete from document where no = #{no}
+	</delete>
+	
+	<update id="update" parameterType="document">
+		update document
+		set 
+			updated_at = now(),
+		<if test="title != null">
+			title = #{title},
+		</if>
+		<if test="contents != null">
+			contents = #{contents},
+		</if>
+		<if test="isPinned != null">
+			is_pinned = #{isPinned},
+		</if>
+			channel_no = #{channelNo}
+		where no = #{no}
+	</update>
+	
+	<select id="findAll" parameterType="document" resultType="document">
+		select no, title, created_at, updated_at, user_no, is_pinned
+		from document
+		where channel_no = #{channelNo}
+	</select>
+	
+	<select id="find" parameterType="long" resultType="document">
+		select no, title, created_at, updated_at, user_no, is_pinned
+		from document
+		where no = #{no}
+	</select>
+</mapper>

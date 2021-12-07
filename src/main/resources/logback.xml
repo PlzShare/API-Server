@@ -11,14 +11,14 @@
 	</appender>
 
 	<appender name="fileAppender2" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>/logex-mysite/mysite.log</file>
+		<file>/logex-weboard/weboard.log</file>
 		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
 			<Pattern>
 				%d{HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %msg%n
 			</Pattern>
 		</encoder>
 		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-			<FileNamePattern>/logex/logex2.%i.log.zip</FileNamePattern>
+			<FileNamePattern>/logex-weboard/logex2.%i.log.zip</FileNamePattern>
 			<MinIndex>1</MinIndex>
 			<MaxIndex>10</MaxIndex>
 		</rollingPolicy>
@@ -27,9 +27,10 @@
 			<MaxFileSize>50KB</MaxFileSize>
 		</triggeringPolicy>
 	</appender>
-	
+
+<!-- 
 	<appender name="fileAppender3" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>/logex-mysite/mysite-springlog.log</file>
+		<file>/logex-weboard/mysite-springlog.log</file>
 		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
 			<Pattern>
 				%d{HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %msg%n
@@ -45,12 +46,13 @@
 			<MaxFileSize>10KB</MaxFileSize>
 		</triggeringPolicy>
 	</appender>	
+ -->	
 
 
 	<!--
 		com.douzone.logex2 아래 패키지 로그들만  \logex\logex2.log 파일에만  출력하는 로거
 	-->
-	<logger name="com.douzone.mysite.advice" level="warn" additivity="false">
+	<logger name="com.douzone.weboard.advice" level="warn" additivity="false">
             <appender-ref ref="fileAppender2" />
 			<appender-ref ref="consoleAppender" />
     </logger>
