@@ -60,8 +60,8 @@ public class WorkspacesController {
 			@PathVariable("userNo") Long userNo){
 		// 워크스페이스 관리자가 워크스페이스 수정 가능
 		Workspaces workspace = Workspaces.builder()
-				.name("DB_update_test1")
-		        .userNo(3L)
+				.name("편집성공?")
+		        .userNo(userNo)
 		        .build();
 		workspacesService.update(workspace);
 		return new ResponseEntity<ApiResult>(HttpStatus.OK);
