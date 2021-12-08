@@ -8,12 +8,18 @@
 	</settings>
 
 	<typeAliases>
+    <typeAlias type="com.douzone.weboard.vo.Channel" alias="channel"/>
+		<typeAlias type="com.douzone.weboard.vo.Noti" alias="noti"/>
+		<typeAlias type="com.douzone.weboard.vo.NotiUser" alias="notiuser"/>
+
 		<typeAlias type="com.douzone.weboard.vo.User" alias="User" />
 		<typeAlias type="com.douzone.weboard.vo.SearchInfo" alias="searchInfo" />
 		<typeAlias type="com.douzone.weboard.vo.Document" alias="document" />
 	</typeAliases>
 
 	<mappers>
+		<mapper resource="mybatis/mappers/channels.xml" />
+		<mapper resource="mybatis/mappers/noti.xml" />
 		<mapper resource="mybatis/mappers/user.xml" />
 		<mapper resource="mybatis/mappers/document.xml" />
 	</mappers>

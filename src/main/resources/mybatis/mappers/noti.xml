@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="noti">
+
+	<insert id="insertnoti" parameterType="noti" useGeneratedKeys="true" keyProperty="no">
+		<![CDATA[
+			insert into noti (type, workspace_no, contents, sender) 
+				values (#{type }, #{workspaceNo }, #{contents }, #{sender })
+		]]>
+	</insert>
+	
+	<insert id="insertnotiuser" parameterType="notiuser" useGeneratedKeys="true" keyProperty="no">
+		<![CDATA[
+			insert into noti_user (send_to, noti_no) values (#{sendTo }, #{notiNo })
+		]]>
+	</insert>
+	
+	<delete id="delete" parameterType="notiuser">
+		<![CDATA[
+			delete from noti_user where no=#{no }
+		]]>
+	</delete>
+
+</mapper>

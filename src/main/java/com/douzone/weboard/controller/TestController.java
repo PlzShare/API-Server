@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.douzone.weboard.util.ApiResult;
 import com.douzone.weboard.vo.User;
 
-@RestController   // responsebody 안적어줘도된다. 
+
+@RestController
 public class TestController {
 	
+	// 조회
 	@GetMapping("/test")
 	public ResponseEntity<ApiResult> test() {
 		User user = User.builder()
@@ -26,13 +28,15 @@ public class TestController {
 
 		return new ResponseEntity<ApiResult>(ApiResult.success(user),HttpStatus.OK);
 	}
+  
 	// 삽입
-	// form data 받는법              post- 조회,삽입,수정
+	// form data 받는 법
 	@PostMapping("/test")
 	public ResponseEntity<ApiResult> postTest(User user){
 		System.out.println(user);
 		return new ResponseEntity<ApiResult>(HttpStatus.OK);
 	}
+  
 	// 수정
 	// json data  
 	@PutMapping("/test")
