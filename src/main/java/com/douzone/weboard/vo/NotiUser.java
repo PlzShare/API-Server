@@ -13,14 +13,9 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @ToString
-public class User {
+public class NotiUser {
 	private Long no;
-	private String id;
-	private String name;
-	private String password;
-	private String nickname;
-	private String regDate;
-	private String leaveDate;
-	private String profile;
-	
+	private Long sendTo;
+	private Long notiNo;
+	private Long isRead;
 }

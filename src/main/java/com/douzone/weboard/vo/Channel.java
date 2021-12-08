@@ -13,14 +13,11 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @ToString
-public class User {
+public class Channel {
 	private Long no;
-	private String id;
 	private String name;
-	private String password;
-	private String nickname;
-	private String regDate;
-	private String leaveDate;
-	private String profile;
-	
+	private String desc;
+	private String createdAt;
+	private Long workspaceNo;
+
 }

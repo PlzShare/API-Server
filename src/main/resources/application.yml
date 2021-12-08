@@ -79,7 +79,7 @@ spring:
 
       password: weboard
       driver-class-name: org.mariadb.jdbc.Driver
-      url: jdbc:mysql://127.0.0.1:3306/weboard?characterEncoding=utf8
+      url: jdbc:mysql://34.64.107.41:3306/weboard?characterEncoding=utf8
       hikari:
          minimum-idle: 20
          maximum-pool-size: 40
