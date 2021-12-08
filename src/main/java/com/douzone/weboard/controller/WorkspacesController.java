@@ -72,21 +72,21 @@ public class WorkspacesController {
 		return new ResponseEntity<ApiResult>(HttpStatus.OK);
 	}
 	
-	@GetMapping("")
-	public ResponseEntity<ApiResult> search(){
-		// 테스트용 키워드 입력.
-		// test할 이름으로 find 테스트.
-		String test_keyword = "";
-		// String test_searchType = "name";
-		String test_searchType = "id";
-		
-		// 이 자리에 프론트에서 받아온 keyword값 넣어주세요
-		// 이 자리에 프론트에서 받아온 searchType값(ex, 워크스페이스이름(name), 유저아이디(id)) 넣어주세요
-		HashMap<String, String> map = new HashMap<>();
-		map.put("keyword", "%" + test_keyword + "%");
-		map.put("searchType", test_searchType);
-		
-		workspacesService.search(map);
-		return new ResponseEntity<ApiResult>(HttpStatus.OK);
-	}
+//	@GetMapping("")
+//	public ResponseEntity<ApiResult> search(){
+//		// 테스트용 키워드 입력.
+//		// test할 이름으로 find 테스트.
+//		String test_keyword = "";
+//		// String test_searchType = "name";
+//		String test_searchType = "id";
+//		
+//		// 이 자리에 프론트에서 받아온 keyword값 넣어주세요
+//		// 이 자리에 프론트에서 받아온 searchType값(ex, 워크스페이스이름(name), 유저아이디(id)) 넣어주세요
+//		HashMap<String, String> map = new HashMap<>();
+//		map.put("keyword", "%" + test_keyword + "%");
+//		map.put("searchType", test_searchType);
+//		
+//		workspacesService.search(map);
+//		return new ResponseEntity<ApiResult>(HttpStatus.OK);
+//	}
 }
