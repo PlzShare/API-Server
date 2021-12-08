@@ -26,8 +26,8 @@
 	<insert id="update" parameterType="workspaces">
 		<![CDATA[
 		update workspace
-		set name = #{name}, created_at = now(),
-		where no = #{userNo};
+		set name = #{name}
+		where user_no = #{userNo};
 		]]>
 	</insert>
 		

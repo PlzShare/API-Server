@@ -13,19 +13,19 @@ public class WorkspaceUsersRepository {
 	private SqlSession sqlSession;
 	
 	public boolean invite(HashMap<String, Long> map) {
-		int count = sqlSession.insert("workspace_users.invite", map);
+		int count = sqlSession.insert("workspaceUsers.invite", map);
 		return count == 1;
 	}
 
 	public boolean leave(HashMap<String, Long> map) {
-		int count = sqlSession.update("workspace_users.leave", map);
+		int count = sqlSession.update("workspaceUsers.leave", map);
 		return count == 1;
 	}
 	
 	public boolean changeRole(HashMap<String, Long> map) {
 		System.out.println(map);
-		int AUCount = sqlSession.update("workspace_users.changeRoleAU", map);
-		int UACount = sqlSession.update("workspace_users.changeRoleUA", map);
+		int AUCount = sqlSession.update("workspaceUsers.changeRoleAU", map);
+		int UACount = sqlSession.update("workspaceUsers.changeRoleUA", map);
 		return (AUCount * UACount) == 1;
 	}
 }
