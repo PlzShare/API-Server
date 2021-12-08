@@ -4,8 +4,8 @@
 
 	<insert id="insert" parameterType="user">
 		<![CDATA[
-			insert into user(id, password, name, nickname, profile) 
-				values(#{id}, #{password},#{name}, #{nickname}, #{profile})
+			insert into user(id, password, name, nickname) 
+				values(#{id}, #{password},#{name}, #{nickname})
 		]]>
 	</insert>
 	
