@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.douzone.weboard.util.ApiResult;
 import com.douzone.weboard.vo.User;
 
-@RestController
+@RestController   // responsebody 안적어줘도된다. 
 public class TestController {
 	
 	@GetMapping("/test")
@@ -21,27 +21,33 @@ public class TestController {
 		User user = User.builder()
 						.nickname("test")
 						.id("json response")
-						.password("aaaaa")
+						.password("aaaa")
 						.build();
-		
-		return new ResponseEntity<ApiResult>(ApiResult.success(user), HttpStatus.OK);
+
+		return new ResponseEntity<ApiResult>(ApiResult.success(user),HttpStatus.OK);
 	}
-	
-	// form data 받는 법
+	// 삽입
+	// form data 받는법              post- 조회,삽입,수정
 	@PostMapping("/test")
 	public ResponseEntity<ApiResult> postTest(User user){
 		System.out.println(user);
 		return new ResponseEntity<ApiResult>(HttpStatus.OK);
 	}
-	
-	// json data
+	// 수정
+	// json data  
 	@PutMapping("/test")
 	public ResponseEntity<ApiResult> updateUser(@RequestBody User user){
-		return new ResponseEntity<ApiResult>(ApiResult.success(user), HttpStatus.OK);
+		return new ResponseEntity<ApiResult>(ApiResult.success(user),HttpStatus.OK);
 	}
 	
+	// 삭제
 	@DeleteMapping("/test/{no}")
 	public ResponseEntity<ApiResult> deleteUser(@PathVariable("no") Long no){
-		return new ResponseEntity<ApiResult>(ApiResult.success(no), HttpStatus.OK);
+		return new ResponseEntity<ApiResult>(ApiResult.success(no),HttpStatus.OK);
 	}
+	
 }
+
+
+
+

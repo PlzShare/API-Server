@@ -2,17 +2,20 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+
 	<settings>
-		<setting name="mapUnderscoreToCamelCase" value="true"/>
+		<setting name="mapUnderscoreToCamelCase" value="true" />
 	</settings>
+
 	<typeAliases>
-		<typeAlias type="com.douzone.weboard.vo.Document" alias="document"/>
-	<!-- 
-	 -->
+		<typeAlias type="com.douzone.weboard.vo.User" alias="User" />
+		<typeAlias type="com.douzone.weboard.vo.SearchInfo" alias="searchInfo" />
+		<typeAlias type="com.douzone.weboard.vo.Document" alias="document" />
 	</typeAliases>
+
 	<mappers>
+		<mapper resource="mybatis/mappers/user.xml" />
 		<mapper resource="mybatis/mappers/document.xml" />
-	<!-- 
-	 -->
 	</mappers>
+
 </configuration>
