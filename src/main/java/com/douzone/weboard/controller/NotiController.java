@@ -32,7 +32,7 @@ public class NotiController {
 			.type("invite")
 			.workspaceNo(1L).build();
 		
-		notiService.addNoti(noti, List.of(User.builder().no(2L).build(),User.builder().no(1L).build()));
+//		notiService.addNoti(noti, List.of(User.builder().no(2L).build(),User.builder().no(1L).build()));
 		
 		return new ResponseEntity<ApiResult>(ApiResult.success(noti), HttpStatus.OK);
 		
