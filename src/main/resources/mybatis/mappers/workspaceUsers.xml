@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="workspace_users">
+<mapper namespace="workspaceUsers">
 	<insert id="invite" parameterType="map">
 		<if test='userRole == 0'>
 			<![CDATA[
