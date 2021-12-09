@@ -1,8 +1,6 @@
 package com.douzone.weboard.controller;
-
 import java.util.HashMap;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,15 +12,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.douzone.weboard.service.WorkspacesService;
 import com.douzone.weboard.util.ApiResult;
 import com.douzone.weboard.vo.Workspaces;
-
 @RestController // responsebody 다 붙어진 효과
 @RequestMapping("/workspaces/{userNo}")
 public class WorkspacesController {
-
 	@Autowired
 	private WorkspacesService workspacesService;
 	
@@ -41,7 +36,8 @@ public class WorkspacesController {
 	public ResponseEntity<ApiResult> insert(
 			@PathVariable("userNo") Long userNo,
 			@RequestParam("name") String name){
-		
+		System.out.println(userNo);
+		System.out.println(name);
 		// 워크스페이스 관리자가 워크스페이스 추가 가능
 		Workspaces workspace = Workspaces.builder()
 		        .userNo(userNo)
@@ -53,7 +49,8 @@ public class WorkspacesController {
 	
 	// update
 	@PutMapping("")
-	public ResponseEntity<ApiResult> update(){
+	public ResponseEntity<ApiResult> update(
+			@PathVariable("userNo") Long userNo){
 		// 워크스페이스 관리자가 워크스페이스 수정 가능
 		Workspaces workspace = Workspaces.builder()
 				.name("DB_update_test1")
@@ -65,15 +62,17 @@ public class WorkspacesController {
 	
 	// delete
 	@DeleteMapping("")
-	public ResponseEntity<ApiResult> delete(){
+	public ResponseEntity<ApiResult> delete(
+			@PathVariable("userNo") Long userNo){
 		// 워크스페이스 관리자가 워크스페이스 삭제 가능
 		Long test_workspaceNo = 2L;
 		workspacesService.delete(test_workspaceNo);
 		return new ResponseEntity<ApiResult>(HttpStatus.OK);
 	}
 	
-	@GetMapping("")
-	public ResponseEntity<ApiResult> search(){
+	@GetMapping("/search")
+	public ResponseEntity<ApiResult> search(
+			@PathVariable("userNo") Long userNo){
 		// 테스트용 키워드 입력.
 		// test할 이름으로 find 테스트.
 		String test_keyword = "";

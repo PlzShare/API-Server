@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.douzone.weboard.service.FileuploadService;
 import com.douzone.weboard.service.UserService;
 import com.douzone.weboard.util.ApiResult;
 import com.douzone.weboard.vo.SearchInfo;
@@ -25,6 +28,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/users")
 public class UserController {
 	private final UserService userService;
+	private final FileuploadService FileuploadService;
 	
 	//회원가입
 	@PostMapping("/join")
@@ -58,8 +62,13 @@ public class UserController {
 	
 	// 회원정보 수정
 	@PutMapping("/{userNo}")
-	public ResponseEntity<ApiResult> update(@RequestBody User user, @PathVariable Long userNo){
+	public ResponseEntity<ApiResult> update(User user, @PathVariable Long userNo , @RequestParam("file") MultipartFile file) {
+		
+		String url = FileuploadService.restoreImage(file, "/user/profile");
+		
 		user.setNo(userNo);
+		user.setProfile(url);
+		
 		userService.update(user);
 		
 		return new ResponseEntity<ApiResult>(ApiResult.success(user),HttpStatus.OK);
