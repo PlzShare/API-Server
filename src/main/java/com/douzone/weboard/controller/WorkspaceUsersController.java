@@ -1,17 +1,22 @@
 package com.douzone.weboard.controller;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.douzone.weboard.service.WorkspaceUsersService;
 import com.douzone.weboard.util.ApiResult;
+import com.douzone.weboard.vo.WorkspaceUsers;
 
 @RestController // responsebody 다 붙어진 효과
 @RequestMapping("/workspace-users")
@@ -19,6 +24,20 @@ public class WorkspaceUsersController {
 
 	@Autowired
 	private WorkspaceUsersService workspaceUsersService;
+	
+	@GetMapping("/{wno}/{uno}")
+	public ResponseEntity<ApiResult> getlist(@PathVariable("wno") Long wno, @PathVariable("uno") Long uno){
+		
+		WorkspaceUsers workspaceUsers = new WorkspaceUsers();
+		workspaceUsers.setUserNo(uno);
+		List<WorkspaceUsers> result = workspaceUsersService.getUser(wno);
+
+		
+		System.out.println(result);
+		
+		return new ResponseEntity<ApiResult>(ApiResult.success(result), HttpStatus.OK);
+	}
+
 	
 	@PostMapping("/invite")
 	public ResponseEntity<ApiResult> invite(){
@@ -56,9 +75,9 @@ public class WorkspaceUsersController {
 	@PutMapping("/change-role")
 	public ResponseEntity<ApiResult> changeRole(){
 		
-		Long testAdminNo = 2L;
-		Long testUserNo = 1L;
-		Long testWorkspaceNo = 3L;
+		Long testAdminNo = 3L;
+		Long testUserNo = 4L;
+		Long testWorkspaceNo = 78L;
 		
 		HashMap<String, Long> map = new HashMap<>();
 		map.put("adminNo", testAdminNo);
