@@ -1,15 +1,7 @@
 # active spring boot profile
 spring:
    profiles:
-<<<<<<< HEAD
-<<<<<<< HEAD
       active: ys
-=======
-      active: ds
->>>>>>> 948693a4c0d3e86a7f2427744cae96f90ae7c80f
-=======
-      active: dk
->>>>>>> 1b7d0c995761b36bdfba94a5b6765bc0e4cea262
 ---
 
 # common - spring configuration
@@ -38,11 +30,6 @@ spring:
    aop:
       auto: true
       proxy-target-class: true 
-
-<<<<<<< HEAD
-   
-=======
->>>>>>> 1b7d0c995761b36bdfba94a5b6765bc0e4cea262
 ---
 
 # server
@@ -65,56 +52,11 @@ mybatis:
 
 ---
 
-
-
-
 # logging
 logging:
    config: classpath:logback.xml 
 
----
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-
----
-=======
->>>>>>> 948693a4c0d3e86a7f2427744cae96f90ae7c80f
-=======
->>>>>>> 1b7d0c995761b36bdfba94a5b6765bc0e4cea262
-
-# dev profile - spring boot configuration
-
-spring:
-   config:
-      activate:
-         on-profile: dev
-      
-   # datasource
-   datasource:
-      username: weboard
-
-      password: weboard
-      driver-class-name: org.mariadb.jdbc.Driver
-      url: jdbc:mysql://34.64.107.41:3306/weboard?characterEncoding=utf8
-      hikari:
-         minimum-idle: 20
-         maximum-pool-size: 40
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-# custom property
-fileupload:
-   urlBasePath: /images
-   fileSaveBasePath: /upload-images
-   resourceMapping: ${fileupload.urlBasePath}/**
-   fileUploadLocation: file:${fileupload.fileSaveBasePath}/
-=======
-
->>>>>>> 948693a4c0d3e86a7f2427744cae96f90ae7c80f
-=======
-
->>>>>>> 1b7d0c995761b36bdfba94a5b6765bc0e4cea262
 ---
 # production profile - spring boot configuration
 spring:
@@ -131,4 +73,3 @@ spring:
       hikari:
          minimum-idle: 100
          maximum-pool-size: 200
-
