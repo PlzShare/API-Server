@@ -4,12 +4,12 @@
 	<insert id="invite" parameterType="map">
 		<if test='userRole == 0'>
 			<![CDATA[
-			insert into workspace_user(user_no, workspace_no, role) values(#{userNo}, #{workspaceNo}, 'admin');
+			insert into workspace_user(user_no, workspace_no, role) values(#{userNo}, #{workspaceNo}, now(), 'admin');
 			]]>
 		</if>
 		<if test='userRole != 0'>
 			<![CDATA[
-			insert into workspace_user(user_no, workspace_no) values(#{userNo}, #{workspaceNo});
+			insert into workspace_user(user_no, workspace_no, reg_date) values(#{userNo}, #{workspaceNo}, now());
 			]]>
 		</if>
 	</insert>
@@ -25,7 +25,7 @@
 			<![CDATA[
 			update workspace_user set reg_date = now()
 			where user_no = #{userNo}
-			  and workspace_no = #{workspaceNo};
+			and workspace_no = #{workspaceNo};
 			]]>
 		</if>
 	</update>

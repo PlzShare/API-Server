@@ -5,13 +5,16 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.douzone.weboard.service.WorkspaceUsersService;
 import com.douzone.weboard.util.ApiResult;
+import com.douzone.weboard.vo.WorkspaceUsers;
 
 @RestController // responsebody 다 붙어진 효과
 @RequestMapping("/workspace-users")
@@ -20,27 +23,30 @@ public class WorkspaceUsersController {
 	@Autowired
 	private WorkspaceUsersService workspaceUsersService;
 	
-	@PostMapping("/invite")
-	public ResponseEntity<ApiResult> invite(){
+	@PostMapping("")
+	public ResponseEntity<ApiResult> invite(
+			@RequestBody WorkspaceUsers workspaceUsers){
 		HashMap<String, Long> map = new HashMap<>();
 
-		Long testUserNo = 2L;
-		Long testWorkspaceNo = 31L;
+		System.out.println(workspaceUsers);
+		Long userNo = workspaceUsers.getUserNo();
+		Long workspaceNo = workspaceUsers.getWorkspaceNo();
 		
-		map.put("userNo", testUserNo);
-		map.put("workspaceNo", testWorkspaceNo);
+		map.put("userNo", userNo);
+		map.put("workspaceNo", workspaceNo);
 		map.put("userRole", 1L); // 워크스페이스 생성자면 0L, 초대받은(일반) 유저는 1L
 		
 		workspaceUsersService.invite(map);
 		return new ResponseEntity<ApiResult>(HttpStatus.OK);
 	}
 	
-	@PutMapping("/leave")
-	public ResponseEntity<ApiResult> leave(){
+	@PutMapping("")
+	public ResponseEntity<ApiResult> leave(
+			@RequestBody WorkspaceUsers workspaceUsers){
 		
-		Long testUserNo = 2L;
-		Long testWorkspaceNo = 31L;
-		Long testRole = 1L; // 일반유저로 테스트
+		Long testUserNo = workspaceUsers.getUserNo();
+		Long testWorkspaceNo = workspaceUsers.getWorkspaceNo();
+		Long testRole = 1L; // 일반유저만 이 방을 나갈 수 있게. 승현아 미안해 ㅠ
 		
 		HashMap<String, Long> map = new HashMap<>();
 		map.put("userNo", testUserNo);
