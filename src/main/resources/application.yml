@@ -31,7 +31,6 @@ spring:
       auto: true
       proxy-target-class: true 
 
-
 ---
 
 # server
@@ -54,16 +53,11 @@ mybatis:
 
 ---
 
-
-
-
 # logging
 logging:
    config: classpath:logback.xml 
 
 
-
----
 # production profile - spring boot configuration
 spring:
    config:
@@ -79,4 +73,3 @@ spring:
       hikari:
          minimum-idle: 100
          maximum-pool-size: 200
-

@@ -37,7 +37,7 @@ public class WorkspacesController {
 		workspacesService.insert(workspace);
 		return new ResponseEntity<ApiResult>(HttpStatus.OK);
 	}
-	
+	 
 	// update
 	@PutMapping("")
 	public ResponseEntity<ApiResult> update(

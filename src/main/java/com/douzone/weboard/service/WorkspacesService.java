@@ -26,7 +26,6 @@ public class WorkspacesService {
 	public void insert(Workspaces workspace) {
 		workspacesRepository.insert(workspace);
 		Long workspaceNo = workspace.getNo();
-		System.out.println(workspace);
 		HashMap<String, Long> map = new HashMap<>();
 		map.put("userNo", workspace.getUserNo());
 		map.put("workspaceNo", workspaceNo);
