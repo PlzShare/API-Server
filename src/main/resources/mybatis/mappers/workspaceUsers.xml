@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="workspaceUsers">
+
+	<select id="findUser" parameterType="Long" resultType="map">
+		<![CDATA[
+			select b.id as id, a.user_no as userNo 
+				from workspace_user a, user b
+				where a.user_no = b.no
+				and a.workspace_no = #{workspaceNo}
+				order by b.id desc
+		]]>
+	</select>
+
+
 	<insert id="invite" parameterType="map">
 		<if test='userRole == 0'>
 			<![CDATA[
