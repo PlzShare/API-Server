@@ -39,27 +39,30 @@ public class WorkspaceUsersController {
 	}
 
 	
-	@PostMapping("/invite")
-	public ResponseEntity<ApiResult> invite(){
+	@PostMapping("")
+	public ResponseEntity<ApiResult> invite(
+			@RequestBody WorkspaceUsers workspaceUsers){
 		HashMap<String, Long> map = new HashMap<>();
 
-		Long testUserNo = 2L;
-		Long testWorkspaceNo = 31L;
+		System.out.println(workspaceUsers);
+		Long userNo = workspaceUsers.getUserNo();
+		Long workspaceNo = workspaceUsers.getWorkspaceNo();
 		
-		map.put("userNo", testUserNo);
-		map.put("workspaceNo", testWorkspaceNo);
+		map.put("userNo", userNo);
+		map.put("workspaceNo", workspaceNo);
 		map.put("userRole", 1L); // 워크스페이스 생성자면 0L, 초대받은(일반) 유저는 1L
 		
 		workspaceUsersService.invite(map);
 		return new ResponseEntity<ApiResult>(HttpStatus.OK);
 	}
 	
-	@PutMapping("/leave")
-	public ResponseEntity<ApiResult> leave(){
+	@PutMapping("")
+	public ResponseEntity<ApiResult> leave(
+			@RequestBody WorkspaceUsers workspaceUsers){
 		
-		Long testUserNo = 2L;
-		Long testWorkspaceNo = 31L;
-		Long testRole = 1L; // 일반유저로 테스트
+		Long testUserNo = workspaceUsers.getUserNo();
+		Long testWorkspaceNo = workspaceUsers.getWorkspaceNo();
+		Long testRole = 1L; // 일반유저만 이 방을 나갈 수 있게. 승현아 미안해 ㅠ
 		
 		HashMap<String, Long> map = new HashMap<>();
 		map.put("userNo", testUserNo);

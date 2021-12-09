@@ -2,10 +2,14 @@
 spring:
    profiles:
 <<<<<<< HEAD
+<<<<<<< HEAD
       active: ys
 =======
       active: ds
 >>>>>>> 948693a4c0d3e86a7f2427744cae96f90ae7c80f
+=======
+      active: dk
+>>>>>>> 1b7d0c995761b36bdfba94a5b6765bc0e4cea262
 ---
 
 # common - spring configuration
@@ -35,7 +39,10 @@ spring:
       auto: true
       proxy-target-class: true 
 
+<<<<<<< HEAD
    
+=======
+>>>>>>> 1b7d0c995761b36bdfba94a5b6765bc0e4cea262
 ---
 
 # server
@@ -67,11 +74,14 @@ logging:
 
 ---
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 ---
 =======
 >>>>>>> 948693a4c0d3e86a7f2427744cae96f90ae7c80f
+=======
+>>>>>>> 1b7d0c995761b36bdfba94a5b6765bc0e4cea262
 
 # dev profile - spring boot configuration
 
@@ -92,6 +102,7 @@ spring:
          maximum-pool-size: 40
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # custom property
 fileupload:
    urlBasePath: /images
@@ -101,6 +112,9 @@ fileupload:
 =======
 
 >>>>>>> 948693a4c0d3e86a7f2427744cae96f90ae7c80f
+=======
+
+>>>>>>> 1b7d0c995761b36bdfba94a5b6765bc0e4cea262
 ---
 # production profile - spring boot configuration
 spring:

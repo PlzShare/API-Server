@@ -4,24 +4,21 @@
 
 	<select id="findAll" parameterType="long" resultType="workspaces">
 		<![CDATA[
-		select no, name, created_at, user_no
-		from workspace
-		where user_no = #{userNo};
+		select a.no as no, a.name as name, a.created_at as created_at, a.user_no as user_no
+		from workspace a join 
+							(select user_no, workspace_no from workspace_user
+							 where reg_date='9999-12-31 00:00:00' and user_no = #{userNo}) b	 
+						on a.no = b.workspace_no 
+		where a.user_no = #{userNo};
 		]]>
 	</select>
 	
-	<insert id="insert" parameterType="workspaces">
+	<insert id="insert" parameterType="workspaces" useGeneratedKeys="true" keyProperty="no">
 		<![CDATA[
 		insert into workspace(name, user_no)
 		values(#{name}, #{userNo});
 		]]>
 	</insert>
-	
-	<select id="findInsertOne" parameterType="workspaces" resultType="long">
-		<![CDATA[
-		select last_insert_id() as workspace;
-		]]>
-	</select>
 
 	<insert id="update" parameterType="workspaces">
 		<![CDATA[

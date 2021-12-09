@@ -22,13 +22,13 @@ public class WorkspacesController {
 	private WorkspacesService workspacesService;
 	
 	// main
-	@GetMapping("")
+	@GetMapping("/{userNo}")
 	public ResponseEntity<ApiResult> main(
-			Workspaces workspace){
-		Long userNo = workspace.getUserNo();
+			@PathVariable("userNo") Long userNo){
 		List<Workspaces> list = workspacesService.findAll(userNo);
 		return new ResponseEntity<ApiResult>(ApiResult.success(list), HttpStatus.OK); // 리턴 여러개로 정상동작 / 오류동작으로 분기
 	}
+
 	// insert
 	@PostMapping("")
 	public ResponseEntity<ApiResult> insert(
@@ -49,12 +49,10 @@ public class WorkspacesController {
 	}
 	
 	// delete
-	@DeleteMapping("")
+	@DeleteMapping("/{workspaceNo}")
 	public ResponseEntity<ApiResult> delete(
-			@RequestBody Workspaces workspace){
+			@PathVariable("workspaecNo") Long workspaceNo){
 		// 워크스페이스 관리자가 워크스페이스 삭제 가능
-		Long workspaceNo = workspace.getNo();
-		System.out.println(workspaceNo);
 		workspacesService.delete(workspaceNo);
 		return new ResponseEntity<ApiResult>(HttpStatus.OK);
 	}
