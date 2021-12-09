@@ -25,8 +25,8 @@ public class WorkspacesService {
 	
 	public void insert(Workspaces workspace) {
 		workspacesRepository.insert(workspace);
-		Long workspaceNo = workspacesRepository.findInsertFirst(workspace);
-		
+		Long workspaceNo = workspace.getNo();
+		System.out.println(workspace);
 		HashMap<String, Long> map = new HashMap<>();
 		map.put("userNo", workspace.getUserNo());
 		map.put("workspaceNo", workspaceNo);
@@ -39,8 +39,8 @@ public class WorkspacesService {
 		workspacesRepository.update(workspace);
 	}
 	
-	public void delete(Long no) {
-		workspacesRepository.delete(no);
+	public void delete(Long workspaceNo) {
+		workspacesRepository.delete(workspaceNo);
 	}	
 	
 	public List<Workspaces> search(HashMap<String, String> map) {
