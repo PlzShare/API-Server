@@ -1,7 +1,11 @@
 # active spring boot profile
 spring:
    profiles:
+<<<<<<< HEAD
       active: ys
+=======
+      active: ds
+>>>>>>> 948693a4c0d3e86a7f2427744cae96f90ae7c80f
 ---
 
 # common - spring configuration
@@ -30,6 +34,8 @@ spring:
    aop:
       auto: true
       proxy-target-class: true 
+
+   
 ---
 
 # server
@@ -52,14 +58,20 @@ mybatis:
 
 ---
 
+
+
+
 # logging
 logging:
    config: classpath:logback.xml 
 
 ---
+<<<<<<< HEAD
 
 
 ---
+=======
+>>>>>>> 948693a4c0d3e86a7f2427744cae96f90ae7c80f
 
 # dev profile - spring boot configuration
 
@@ -79,12 +91,16 @@ spring:
          minimum-idle: 20
          maximum-pool-size: 40
 
+<<<<<<< HEAD
 # custom property
 fileupload:
    urlBasePath: /images
    fileSaveBasePath: /upload-images
    resourceMapping: ${fileupload.urlBasePath}/**
    fileUploadLocation: file:${fileupload.fileSaveBasePath}/
+=======
+
+>>>>>>> 948693a4c0d3e86a7f2427744cae96f90ae7c80f
 ---
 # production profile - spring boot configuration
 spring:
@@ -101,3 +117,4 @@ spring:
       hikari:
          minimum-idle: 100
          maximum-pool-size: 200
+

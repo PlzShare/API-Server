@@ -1,0 +1,23 @@
+# dev profile - spring boot configuration
+spring:
+   config:
+      activate:
+         on-profile: ds
+      
+   # datasource
+   datasource:
+      username: weboard
+
+      password: weboard
+      driver-class-name: org.mariadb.jdbc.Driver
+      url: jdbc:mysql://34.64.107.41:3306/weboard?characterEncoding=utf8
+      hikari:
+         minimum-idle: 20
+         maximum-pool-size: 40
+
+# custom property
+fileupload:
+   urlBasePath: /upload-images
+   fileSaveBasePath: /douzone2021/project/template/public/upload-images
+   resourceMapping: ${fileupload.urlBasePath}/**
+   fileUploadLocation: file:${fileupload.fileSaveBasePath}/
