@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -56,12 +57,13 @@ public class WorkspaceUsersController {
 		return new ResponseEntity<ApiResult>(HttpStatus.OK);
 	}
 	
-	@PutMapping("")
+	@DeleteMapping("/{userNo}/{workspaceNo}")
 	public ResponseEntity<ApiResult> leave(
-			@RequestBody WorkspaceUsers workspaceUsers){
+			@PathVariable("workspaceNo") Long workspaceNo,
+			@PathVariable("userNo") Long userNo){
 		
-		Long testUserNo = workspaceUsers.getUserNo();
-		Long testWorkspaceNo = workspaceUsers.getWorkspaceNo();
+		Long testUserNo = userNo;
+		Long testWorkspaceNo = workspaceNo;
 		Long testRole = 1L; // 일반유저만 이 방을 나갈 수 있게. 하드코딩해서 승현아 미안해 ㅠ
 		
 		HashMap<String, Long> map = new HashMap<>();
