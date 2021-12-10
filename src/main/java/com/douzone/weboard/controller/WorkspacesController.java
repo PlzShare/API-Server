@@ -12,14 +12,20 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.douzone.weboard.service.WorkspaceUsersService;
 import com.douzone.weboard.service.WorkspacesService;
 import com.douzone.weboard.util.ApiResult;
+import com.douzone.weboard.vo.WorkspaceUsers;
 import com.douzone.weboard.vo.Workspaces;
 @RestController // responsebody 다 붙어진 효과
 @RequestMapping("/workspaces")
 public class WorkspacesController {
 	@Autowired
 	private WorkspacesService workspacesService;
+
+	@Autowired
+	private WorkspaceUsersService workspaceUsersService;
 	
 	// main
 	@GetMapping("/{userNo}")
@@ -51,17 +57,19 @@ public class WorkspacesController {
 	// delete
 	@DeleteMapping("/{workspaceNo}")
 	public ResponseEntity<ApiResult> delete(
-			@PathVariable("workspaecNo") Long workspaceNo){
+			@PathVariable("workspaceNo") Long workspaceNo){
 		// 워크스페이스 관리자가 워크스페이스 삭제 가능
 		workspacesService.delete(workspaceNo);
+		System.out.println("야!!!");
 		return new ResponseEntity<ApiResult>(HttpStatus.OK);
 	}
 	
 	// 용신님 도와주세요
-	// search
-	@GetMapping("/search")
+	// search - 미완성이요. 문제점 발견해써요.... 빠른 수정할게요오...
+	@GetMapping("/search/{userNo}")
 	public ResponseEntity<ApiResult> search(
 			@PathVariable("userNo") Long userNo){
+		
 		// 테스트용 키워드 입력.
 		// test할 이름으로 find 테스트.
 		String test_keyword = "";
@@ -77,4 +85,73 @@ public class WorkspacesController {
 		workspacesService.search(map);
 		return new ResponseEntity<ApiResult>(HttpStatus.OK);
 	}
+	
+	////////////////////////////// /workspace-users /////////////////////////////////////////
+	
+	@GetMapping("/workspace-users/{userNo}/{workspaceNo}")
+	public ResponseEntity<ApiResult> getlist(
+			@PathVariable("userNo") Long userNo, 
+			@PathVariable("workspaceNo") Long workspaceNo){
+		
+		WorkspaceUsers workspaceUsers = new WorkspaceUsers();
+		workspaceUsers.setUserNo(userNo);
+		List<WorkspaceUsers> result = workspaceUsersService.getUser(workspaceNo);
+				
+		return new ResponseEntity<ApiResult>(ApiResult.success(result), HttpStatus.OK);
+	}
+	
+	@PostMapping("/workspace-users")
+	public ResponseEntity<ApiResult> invite(
+			@RequestBody WorkspaceUsers workspaceUsers){
+		HashMap<String, Long> map = new HashMap<>();
+
+		Long userNo = workspaceUsers.getUserNo();
+		Long workspaceNo = workspaceUsers.getWorkspaceNo();
+		
+		map.put("userNo", userNo);
+		map.put("workspaceNo", workspaceNo);
+		map.put("userRole", 1L); // 워크스페이스 생성자면 0L, 초대받은(일반) 유저는 1L
+		
+		workspaceUsersService.invite(map);
+		return new ResponseEntity<ApiResult>(HttpStatus.OK);
+	}
+	
+	@DeleteMapping("/workspace-users/{userNo}/{workspaceNo}")
+	public ResponseEntity<ApiResult> leave(
+			@PathVariable("workspaceNo") Long workspaceNo,
+			@PathVariable("userNo") Long userNo){
+		
+		Long testUserNo = userNo;
+		Long testWorkspaceNo = workspaceNo;
+		Long testRole = 1L; // 일반유저 하드코딩
+		
+		HashMap<String, Long> map = new HashMap<>();
+		map.put("userNo", testUserNo);
+		map.put("workspaceNo", testWorkspaceNo);
+		map.put("user", testRole); // 워크스페이스 생성자면 0, 초대받은 유저(일반유저)는 1
+		
+		// 다시 한 번 고려할 것
+		workspaceUsersService.leave(map);
+		
+		return new ResponseEntity<ApiResult>(HttpStatus.OK);
+	}
+	
+	// 테스트 돌아는 가요... 하지만 좋은 방법 찾고있어요...
+	@PutMapping("/workspace-users/change-role")
+	public ResponseEntity<ApiResult> changeRole(){
+		
+		Long testAdminNo = 4L;
+		Long testUserNo = 21L;
+		Long testWorkspaceNo = 126L;
+		
+		HashMap<String, Long> map = new HashMap<>();
+		map.put("adminNo", testAdminNo);
+		map.put("userNo", testUserNo);
+		map.put("workspaceNo", testWorkspaceNo);
+		
+		workspaceUsersService.changeRole(map);
+		
+		return new ResponseEntity<ApiResult>(HttpStatus.OK);
+	}
+	
 }
