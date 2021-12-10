@@ -62,7 +62,7 @@ public class WorkspaceUsersController {
 		
 		Long testUserNo = workspaceUsers.getUserNo();
 		Long testWorkspaceNo = workspaceUsers.getWorkspaceNo();
-		Long testRole = 1L; // 일반유저만 이 방을 나갈 수 있게. 승현아 미안해 ㅠ
+		Long testRole = 1L; // 일반유저만 이 방을 나갈 수 있게. 하드코딩해서 승현아 미안해 ㅠ
 		
 		HashMap<String, Long> map = new HashMap<>();
 		map.put("userNo", testUserNo);

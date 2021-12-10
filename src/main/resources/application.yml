@@ -1,7 +1,7 @@
 # active spring boot profile
 spring:
    profiles:
-      active: ys
+      active: dk
 ---
 
 # common - spring configuration
@@ -30,6 +30,7 @@ spring:
    aop:
       auto: true
       proxy-target-class: true 
+
 ---
 
 # server
@@ -57,7 +58,6 @@ logging:
    config: classpath:logback.xml 
 
 
----
 # production profile - spring boot configuration
 spring:
    config:

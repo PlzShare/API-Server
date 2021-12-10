@@ -16,7 +16,7 @@
 	<insert id="invite" parameterType="map">
 		<if test='userRole == 0'>
 			<![CDATA[
-			insert into workspace_user(user_no, workspace_no, role) values(#{userNo}, #{workspaceNo}, now(), 'admin');
+			insert into workspace_user(user_no, workspace_no, reg_date, role) values(#{userNo}, #{workspaceNo}, now(), 'admin');
 			]]>
 		</if>
 		<if test='userRole != 0'>
@@ -35,7 +35,7 @@
 		</if>
 		<if test='user != 0'>
 			<![CDATA[
-			update workspace_user set reg_date = now()
+			update workspace_user set reg_date = '9999-12-31 00:00:00'
 			where user_no = #{userNo}
 			and workspace_no = #{workspaceNo};
 			]]>
