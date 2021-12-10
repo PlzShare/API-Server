@@ -60,7 +60,6 @@ public class WorkspacesController {
 			@PathVariable("workspaceNo") Long workspaceNo){
 		// 워크스페이스 관리자가 워크스페이스 삭제 가능
 		workspacesService.delete(workspaceNo);
-		System.out.println("야!!!");
 		return new ResponseEntity<ApiResult>(HttpStatus.OK);
 	}
 	
@@ -71,13 +70,10 @@ public class WorkspacesController {
 			@PathVariable("userNo") Long userNo){
 		
 		// 테스트용 키워드 입력.
-		// test할 이름으로 find 테스트.
 		String test_keyword = "";
-		// String test_searchType = "name";
 		String test_searchType = "id";
 		
-		// 이 자리에 프론트에서 받아온 keyword값 넣어주세요
-		// 이 자리에 프론트에서 받아온 searchType값(ex, 워크스페이스이름(name), 유저아이디(id)) 넣어주세요
+		// 이 자리에 프론트에서 받아온 keyword, searchType값(ex, 워크스페이스이름(name), 유저아이디(id)) 넣어주세요
 		HashMap<String, String> map = new HashMap<>();
 		map.put("keyword", "%" + test_keyword + "%");
 		map.put("searchType", test_searchType);
@@ -123,12 +119,12 @@ public class WorkspacesController {
 		
 		Long testUserNo = userNo;
 		Long testWorkspaceNo = workspaceNo;
-		Long testRole = 1L; // 일반유저 하드코딩
+		Long testRole = 1L; // 워크스페이스 생성자면 0L, 초대받은 유저(일반유저)는 1L
 		
 		HashMap<String, Long> map = new HashMap<>();
 		map.put("userNo", testUserNo);
 		map.put("workspaceNo", testWorkspaceNo);
-		map.put("user", testRole); // 워크스페이스 생성자면 0, 초대받은 유저(일반유저)는 1
+		map.put("user", testRole);
 		
 		// 다시 한 번 고려할 것
 		workspaceUsersService.leave(map);

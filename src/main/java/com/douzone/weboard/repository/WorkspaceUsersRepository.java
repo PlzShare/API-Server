@@ -17,9 +17,6 @@ public class WorkspaceUsersRepository {
 	
 	public List<WorkspaceUsers> findUser(Long wno){
 		return sqlSession.selectList("workspaceUsers.findUser", wno);
-				
-				
-				
 //				("workspaceUsers.findUser", wno);
 	}
 	
@@ -34,7 +31,6 @@ public class WorkspaceUsersRepository {
 	}
 	
 	public boolean changeRole(HashMap<String, Long> map) {
-		System.out.println(map);
 		int AUCount = sqlSession.update("workspaceUsers.changeRoleAU", map);
 		int UACount = sqlSession.update("workspaceUsers.changeRoleUA", map);
 		return (AUCount * UACount) == 1;
