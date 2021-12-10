@@ -4,7 +4,7 @@
 
 	<select id="findUser" parameterType="Long" resultType="map">
 		<![CDATA[
-			select b.id as id, a.user_no as userNo 
+			select b.id as id, a.user_no as userNo , b.nickname
 				from workspace_user a, user b
 				where a.user_no = b.no
 				and a.workspace_no = #{workspaceNo}
