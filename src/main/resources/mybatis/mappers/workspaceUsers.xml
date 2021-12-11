@@ -4,7 +4,7 @@
 
 	<select id="findUser" parameterType="Long" resultType="map">
 		<![CDATA[
-			select b.id as id, a.user_no as userNo 
+			select b.id as id, a.user_no as userNo , b.nickname
 				from workspace_user a, user b
 				where a.user_no = b.no
 				and a.workspace_no = #{workspaceNo}
@@ -16,7 +16,7 @@
 	<insert id="invite" parameterType="map">
 		<if test='userRole == 0'>
 			<![CDATA[
-			insert into workspace_user(user_no, workspace_no, role) values(#{userNo}, #{workspaceNo}, now(), 'admin');
+			insert into workspace_user(user_no, workspace_no, reg_date, role) values(#{userNo}, #{workspaceNo}, now(), 'admin');
 			]]>
 		</if>
 		<if test='userRole != 0'>
@@ -27,7 +27,7 @@
 	</insert>
 	
 	<!-- 미완성 -->
-	<update id="leave" parameterType="map">
+	<delete id="leave" parameterType="map">
 		<if test='user == 0'>
 			<![CDATA[
 
@@ -35,12 +35,11 @@
 		</if>
 		<if test='user != 0'>
 			<![CDATA[
-			update workspace_user set reg_date = now()
-			where user_no = #{userNo}
-			and workspace_no = #{workspaceNo};
+			delete from workspace_user where user_no = #{userNo}
+			and workspace_no = #{workspaceNo}
 			]]>
 		</if>
-	</update>
+	</delete>
 	
 	<update id="changeRoleUA" parameterType="map">
 		<![CDATA[

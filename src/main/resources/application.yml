@@ -2,10 +2,6 @@
 spring:
    profiles:
       active: ds
----
-
-# common - spring configuration
-spring:
 
    # devtools - live reload
    devtools:
@@ -30,6 +26,7 @@ spring:
    aop:
       auto: true
       proxy-target-class: true 
+
 ---
 
 # server
@@ -57,7 +54,6 @@ logging:
    config: classpath:logback.xml 
 
 
----
 # production profile - spring boot configuration
 spring:
    config:
