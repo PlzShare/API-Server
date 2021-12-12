@@ -1,11 +1,7 @@
 # active spring boot profile
 spring:
    profiles:
-      active: dk
----
-
-# common - spring configuration
-spring:
+      active: ds
 
    # devtools - live reload
    devtools:
