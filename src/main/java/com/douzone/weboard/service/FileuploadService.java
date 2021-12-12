@@ -20,38 +20,38 @@ public class FileuploadService {
 	@Value("${fileupload.fileSaveBasePath}")
 	private String BASE_PATH;
 	@Value("${fileupload.urlBasePath}")
-	private String URL_BASE;	
+	private String URL_BASE;
 	@Value("${server.port}")
 	private String port;
+
 	public String restoreImage(MultipartFile file, String directory) throws FileUploadException {
 		try {
 			String savePath = BASE_PATH + directory;
 			String url = URL_BASE + directory;
-			
+
+			if (file == null || file.isEmpty()) {
+				return null;
+			}
+
 			File uploadDirectory = new File(savePath);
-			if(!uploadDirectory.exists()) {
+			if (!uploadDirectory.exists()) {
 				uploadDirectory.mkdir();
 			}
-			
-			if(file.isEmpty()) {
-				throw new FileUploadException("file upload error: image empty");
-			}
-			
+
 			String originFilename = file.getOriginalFilename();
-			String extName = originFilename.substring(originFilename.lastIndexOf('.')+1);
+			String extName = originFilename.substring(originFilename.lastIndexOf('.') + 1);
 			String saveFilename = UUID.randomUUID() + "." + extName;
-			
+
 			byte[] data = file.getBytes();
 			OutputStream os = new FileOutputStream(savePath + "/" + saveFilename);
 			os.write(data);
 			os.close();
 
 			return url + "/" + saveFilename;
-			
-		} catch(IOException ex) {
+
+		} catch (IOException ex) {
 			throw new FileUploadException("file upload error:" + ex);
 		}
 	}
-	
+
 }
-	
