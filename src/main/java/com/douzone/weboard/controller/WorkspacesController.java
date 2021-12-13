@@ -21,6 +21,7 @@ import com.douzone.weboard.vo.Workspaces;
 @RestController // responsebody 다 붙어진 효과
 @RequestMapping("/workspaces")
 public class WorkspacesController {
+	
 	@Autowired
 	private WorkspacesService workspacesService;
 
@@ -39,6 +40,7 @@ public class WorkspacesController {
 	@PostMapping("")
 	public ResponseEntity<ApiResult> insert(
 			@RequestBody Workspaces workspace){
+		System.out.println(workspace);
 		// json에 userNo, name 추가해서 보낼 것
 		workspacesService.insert(workspace);
 		return new ResponseEntity<ApiResult>(HttpStatus.OK);
@@ -63,8 +65,6 @@ public class WorkspacesController {
 		return new ResponseEntity<ApiResult>(HttpStatus.OK);
 	}
 	
-	// 용신님 도와주세요
-	// search - 미완성이요. 문제점 발견해써요.... 빠른 수정할게요오...
 	@GetMapping("/search/{userNo}")
 	public ResponseEntity<ApiResult> search(
 			@PathVariable("userNo") Long userNo){

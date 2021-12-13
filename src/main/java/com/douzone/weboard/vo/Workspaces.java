@@ -1,10 +1,11 @@
 package com.douzone.weboard.vo;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -21,5 +22,6 @@ public class Workspaces {
 	private String name;
 	private String createdAt;
 	private Long userNo;
-
+	// 테스트중
+	private List<Long> userNums;
 }
