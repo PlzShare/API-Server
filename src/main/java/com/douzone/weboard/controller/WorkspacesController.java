@@ -1,6 +1,8 @@
 package com.douzone.weboard.controller;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,9 +42,16 @@ public class WorkspacesController {
 	@PostMapping("")
 	public ResponseEntity<ApiResult> insert(
 			@RequestBody Workspaces workspace){
-		System.out.println(workspace);
 		// json에 userNo, name 추가해서 보낼 것
-		workspacesService.insert(workspace);
+		
+		ArrayList<Long> list = new ArrayList<>();
+		
+		list.add(15L);
+		list.add(17L);
+		list.add(19L);
+		list.add(21L);
+		
+		workspacesService.insert(workspace, list);
 		return new ResponseEntity<ApiResult>(HttpStatus.OK);
 	}
 	 
@@ -97,18 +106,18 @@ public class WorkspacesController {
 	}
 	
 	@PostMapping("/workspace-users")
-	public ResponseEntity<ApiResult> invite(
+	public ResponseEntity<ApiResult> inviteUser(
 			@RequestBody WorkspaceUsers workspaceUsers){
-		HashMap<String, Long> map = new HashMap<>();
-
-		Long userNo = workspaceUsers.getUserNo();
-		Long workspaceNo = workspaceUsers.getWorkspaceNo();
-		
-		map.put("userNo", userNo);
-		map.put("workspaceNo", workspaceNo);
-		map.put("userRole", 1L); // 워크스페이스 생성자면 0L, 초대받은(일반) 유저는 1L
-		
-		workspaceUsersService.invite(map);
+//		HashMap<String, Long> map = new HashMap<>();
+//
+//		Long userNo = workspaceUsers.getUserNo();
+//		Long workspaceNo = workspaceUsers.getWorkspaceNo();
+//		
+//		map.put("userNo", userNo);
+//		map.put("workspaceNo", workspaceNo);
+//		map.put("userRole", 1L); // 워크스페이스 생성자면 0L, 초대받은(일반) 유저는 1L
+//		
+		workspaceUsersService.inviteUser(workspaceUsers);
 		return new ResponseEntity<ApiResult>(HttpStatus.OK);
 	}
 	

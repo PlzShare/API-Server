@@ -17,7 +17,6 @@ public class WorkspaceUsersService {
 	
 	public List<WorkspaceUsers> getUser(Long wno){
 		List<WorkspaceUsers> workspaceUserList = workspaceUsersRepository.findUser(wno);
-		
 		return workspaceUserList;
 	}
 	
@@ -26,17 +25,17 @@ public class WorkspaceUsersService {
 		workspaceUsersRepository.leave(map);	
 	}
 	
+	public void inviteUser(WorkspaceUsers workspaceUsers) {
+		workspaceUsersRepository.inviteUser(workspaceUsers);
+	}
+	
 //	public void inviteAdmin(WorkspaceUsers workspaceUsers) {
 //		workspaceUsersRepository.inviteAdmin(workspaceUsers);
 //	}
-//
-//	public void inviteUser(WorkspaceUsers workspaceUsers) {
-//		workspaceUsersRepository.inviteUser(workspaceUsers);
-//	}
 	
-	public void invite(HashMap<String, Long> map) {
-		workspaceUsersRepository.invite(map);
-	}
+//	public void invite(HashMap<String, Long> map) {
+//		workspaceUsersRepository.invite(map);
+//	}
 
 	public void changeRole(HashMap<String, Long> map) {
 		workspaceUsersRepository.changeRole(map);	
