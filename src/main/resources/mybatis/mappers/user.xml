@@ -58,10 +58,12 @@
 		
 	</select>
 	
+	<select id="checkUser" parameterType="String" resultType="long">
+		<![CDATA[
+			select no
+			from user 
+			where id=#{userId}
+		]]>
+	</select>
 	
-
-
-
-
-
 </mapper>

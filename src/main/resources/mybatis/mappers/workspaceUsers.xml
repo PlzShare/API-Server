@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="workspaceUsers">
-
 	<select id="findUser" parameterType="Long" resultType="map">
 		<![CDATA[
 			select b.id as id, a.user_no as userNo, nickname
@@ -12,6 +11,19 @@
 		]]>
 	</select>
 
+	<!--  
+	<insert id="inviteAdmin" parameterType="workspaceUser">
+		<![CDATA[
+			insert into workspace_user(user_no, workspace_no, reg_date, role) values(#{userNo}, #{workspaceNo}, now(), 'admin');
+		]]>
+	</insert>
+	
+	<insert id="inviteUser" parameterType="workspaceUsers">
+		<![CDATA[
+			insert into workspace_user(user_no, workspace_no, reg_date) values(#{userNo}, #{workspaceNo}, now());
+		]]>
+	</insert>
+	-->
 
 	<insert id="invite" parameterType="map">
 		<if test='userRole == 0'>
