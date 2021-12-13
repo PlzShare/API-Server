@@ -26,6 +26,14 @@ public class WorkspaceUsersService {
 		workspaceUsersRepository.leave(map);	
 	}
 	
+//	public void inviteAdmin(WorkspaceUsers workspaceUsers) {
+//		workspaceUsersRepository.inviteAdmin(workspaceUsers);
+//	}
+//
+//	public void inviteUser(WorkspaceUsers workspaceUsers) {
+//		workspaceUsersRepository.inviteUser(workspaceUsers);
+//	}
+	
 	public void invite(HashMap<String, Long> map) {
 		workspaceUsersRepository.invite(map);
 	}

@@ -20,6 +20,16 @@ public class WorkspaceUsersRepository {
 //				("workspaceUsers.findUser", wno);
 	}
 	
+//	public boolean inviteAdmin(WorkspaceUsers workspaceUsers) {
+//		int count = sqlSession.insert("workspaceUsers.inviteAdmin", workspaceUsers);
+//		return count == 1;
+//	}	
+//	
+//	public boolean inviteUser(WorkspaceUsers workspaceUsers) {
+//		int count = sqlSession.insert("workspaceUsers.inviteUser", workspaceUsers);
+//		return count == 1;
+//	}
+	
 	public boolean invite(HashMap<String, Long> map) {
 		int count = sqlSession.insert("workspaceUsers.invite", map);
 		return count == 1;
