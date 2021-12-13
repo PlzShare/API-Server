@@ -49,7 +49,6 @@ public class UserController {
 		return new ResponseEntity<ApiResult>(ApiResult.success(user),HttpStatus.OK);
 	}
 	
-
 	// userNo 가져오기
 	@GetMapping("/{userNo}")
 	public ResponseEntity<ApiResult> getUser(@PathVariable("userNo") Long userNo){
@@ -87,10 +86,17 @@ public class UserController {
 	@GetMapping("")
 	public ResponseEntity<ApiResult> getList(SearchInfo searchInfo){
 		// System.out.println(searchInfo);
-		
 		List<User> list = userService.getList(searchInfo);
-		
 		return new ResponseEntity<ApiResult>(ApiResult.success(list),HttpStatus.OK);
 	}
 	
+	// 멤버 확인
+	@PostMapping("/checkUser")
+	public ResponseEntity<ApiResult> checkUser(
+			@RequestBody User user){
+		Long userNo = userService.checkUser(user.getId());
+		System.out.println(userNo);		
+		return new ResponseEntity<ApiResult>(ApiResult.success(userNo), HttpStatus.OK);
+
+	}
 }

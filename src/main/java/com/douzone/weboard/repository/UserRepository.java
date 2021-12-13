@@ -41,7 +41,8 @@ public class UserRepository {
 	
 		return sqlSession.selectList("user.findList", searchInfo);
 	}
-
 	
-
+	public Long checkUser(String userId) {
+		return sqlSession.selectOne("user.checkUser", userId);
+	}
 }

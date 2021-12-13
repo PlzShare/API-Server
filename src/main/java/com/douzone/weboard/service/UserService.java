@@ -41,6 +41,8 @@ public class UserService {
 		return list;
 	}
 
-
-
+	public Long checkUser(String userId) {
+		return userRepository.checkUser(userId);
+	}
+	
 }
