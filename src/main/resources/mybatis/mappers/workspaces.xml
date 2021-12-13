@@ -24,7 +24,8 @@
 		<![CDATA[
 		update workspace
 		set name = #{name}
-		where user_no = #{userNo};
+		where user_no = #{userNo}
+		and no = #{no };
 		]]>
 	</insert>
 		

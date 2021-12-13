@@ -30,8 +30,8 @@ public class WorkspaceUsersService {
 		workspaceUsersRepository.invite(map);
 	}
 
-	public void changeRole(HashMap<String, Long> map) {
-		workspaceUsersRepository.changeRole(map);	
+	public void changeRole(WorkspaceUsers current, WorkspaceUsers changeData) {
+		workspaceUsersRepository.changeRole(current, changeData);	
 	}
 	
 }

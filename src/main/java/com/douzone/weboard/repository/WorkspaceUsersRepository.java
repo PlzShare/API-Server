@@ -30,9 +30,9 @@ public class WorkspaceUsersRepository {
 		return count == 1;
 	}
 	
-	public boolean changeRole(HashMap<String, Long> map) {
-		int AUCount = sqlSession.update("workspaceUsers.changeRoleAU", map);
-		int UACount = sqlSession.update("workspaceUsers.changeRoleUA", map);
+	public boolean changeRole(WorkspaceUsers current, WorkspaceUsers changeData) {
+		int AUCount = sqlSession.update("workspaceUsers.changeRoleAU", current);
+		int UACount = sqlSession.update("workspaceUsers.changeRoleUA", changeData);
 		return (AUCount * UACount) == 1;
 	}
 }

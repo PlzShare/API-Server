@@ -1,6 +1,7 @@
 package com.douzone.weboard.controller;
 import java.util.HashMap;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.douzone.weboard.annotation.AuthUser;
 import com.douzone.weboard.service.WorkspaceUsersService;
 import com.douzone.weboard.service.WorkspacesService;
 import com.douzone.weboard.util.ApiResult;
+import com.douzone.weboard.vo.User;
 import com.douzone.weboard.vo.WorkspaceUsers;
 import com.douzone.weboard.vo.Workspaces;
 @RestController // responsebody 다 붙어진 효과
@@ -45,11 +48,13 @@ public class WorkspacesController {
 	}
 	 
 	// update
-	@PutMapping("")
+	@PutMapping("/{uno}")
 	public ResponseEntity<ApiResult> update(
-			@RequestBody Workspaces workspace){
+			@RequestBody Workspaces workspace,
+			@PathVariable("uno") Long no){
 		// 워크스페이스 관리자가 워크스페이스 수정 가능
 		// json에 userNo, name 추가해서 보낼 것
+		workspace.setUserNo(no);
 		workspacesService.update(workspace);
 		return new ResponseEntity<ApiResult>(HttpStatus.OK);
 	}
@@ -133,19 +138,22 @@ public class WorkspacesController {
 	}
 	
 	// 테스트 돌아는 가요... 하지만 좋은 방법 찾고있어요...
-	@PutMapping("/workspace-users/change-role")
-	public ResponseEntity<ApiResult> changeRole(){
+	@PutMapping("/workspace-users/change-role/{no}")
+	public ResponseEntity<ApiResult> changeRole(@PathVariable("no") Long no, @RequestBody WorkspaceUsers changeData){
+		WorkspaceUsers current = new WorkspaceUsers();
+		current.setUserNo(no);
+		current.setWorkspaceNo(changeData.getWorkspaceNo());
+
+//		Long testAdminNo = 4L; // 로그인한 유저번호
+//		Long testUserNo = 21L; // 선택한 유저의 no
+//		Long testWorkspaceNo = 126L; // 워크스페이스 no
+	
+//		HashMap<String, Long> map = new HashMap<>();
+//		map.put("adminNo", testAdminNo);
+//		map.put("userNo", testUserNo);
+//		map.put("workspaceNo", testWorkspaceNo);
 		
-		Long testAdminNo = 4L;
-		Long testUserNo = 21L;
-		Long testWorkspaceNo = 126L;
-		
-		HashMap<String, Long> map = new HashMap<>();
-		map.put("adminNo", testAdminNo);
-		map.put("userNo", testUserNo);
-		map.put("workspaceNo", testWorkspaceNo);
-		
-		workspaceUsersService.changeRole(map);
+		workspaceUsersService.changeRole(current, changeData);
 		
 		return new ResponseEntity<ApiResult>(HttpStatus.OK);
 	}
