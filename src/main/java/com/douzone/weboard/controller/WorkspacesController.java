@@ -84,7 +84,7 @@ public class WorkspacesController {
 	
 	////////////////////////////// /workspace-users /////////////////////////////////////////
 	
-	@GetMapping("/workspace-users/{userNo}/{workspaceNo}")
+	@GetMapping("/workspace-users/{workspaceNo}/{userNo}")
 	public ResponseEntity<ApiResult> getlist(
 			@PathVariable("userNo") Long userNo, 
 			@PathVariable("workspaceNo") Long workspaceNo){
