@@ -23,7 +23,9 @@ public class WorkspacesService {
 	public List<Workspaces> findAll(Long userNo) {
 		return workspacesRepository.findAll(userNo);
 	}
-	
+	public Workspaces find(Long wno) {
+		return workspacesRepository.find(wno);
+	}
 	public void insert(Workspaces workspace) {
 		
 		WorkspaceUsers workspaceUsers = new WorkspaceUsers();
