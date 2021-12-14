@@ -1,12 +1,13 @@
 package com.douzone.weboard.repository;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.douzone.weboard.vo.ChangeUser;
 import com.douzone.weboard.vo.WorkspaceUsers;
 
 @Repository
@@ -20,29 +21,24 @@ public class WorkspaceUsersRepository {
 //				("workspaceUsers.findUser", wno);
 	}
 	
-//	public boolean inviteAdmin(WorkspaceUsers workspaceUsers) {
-//		int count = sqlSession.insert("workspaceUsers.inviteAdmin", workspaceUsers);
-//		return count == 1;
-//	}	
-//	
-//	public boolean inviteUser(WorkspaceUsers workspaceUsers) {
-//		int count = sqlSession.insert("workspaceUsers.inviteUser", workspaceUsers);
-//		return count == 1;
-//	}
+	public boolean inviteAdmin(WorkspaceUsers workspaceUsers) {
+		int count = sqlSession.insert("workspaceUsers.inviteAdmin", workspaceUsers);
+		return count == 1;
+	}	
 	
-	public boolean invite(HashMap<String, Long> map) {
-		int count = sqlSession.insert("workspaceUsers.invite", map);
+	public boolean inviteUser(WorkspaceUsers workspaceUsers) {
+		int count = sqlSession.insert("workspaceUsers.inviteUser", workspaceUsers);
 		return count == 1;
 	}
 
-	public boolean leave(HashMap<String, Long> map) {
-		int count = sqlSession.update("workspaceUsers.leave", map);
+	public boolean leave(WorkspaceUsers workspaceUsers) {
+		int count = sqlSession.update("workspaceUsers.leave", workspaceUsers);
 		return count == 1;
 	}
 	
-	public boolean changeRole(WorkspaceUsers current, WorkspaceUsers changeData) {
-		int AUCount = sqlSession.update("workspaceUsers.changeRoleAU", current);
-		int UACount = sqlSession.update("workspaceUsers.changeRoleUA", changeData);
+	public boolean changeRole(ChangeUser chUser) {
+		int AUCount = sqlSession.update("workspaceUsers.changeRoleAU", chUser);
+		int UACount = sqlSession.update("workspaceUsers.changeRoleUA", chUser);
 		return (AUCount * UACount) == 1;
 	}
 }

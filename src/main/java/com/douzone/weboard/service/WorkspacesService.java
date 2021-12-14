@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.douzone.weboard.repository.WorkspaceUsersRepository;
 import com.douzone.weboard.repository.WorkspacesRepository;
+import com.douzone.weboard.vo.WorkspaceUsers;
 import com.douzone.weboard.vo.Workspaces;
 
 @Service
@@ -25,30 +26,27 @@ public class WorkspacesService {
 	
 	public void insert(Workspaces workspace) {
 		
-		// [0, 1, 2, 3] 배열에서 첫번째는 admin
 		
-		// 0번째 userAdmin
+		WorkspaceUsers workspaceUsers = new WorkspaceUsers();
+
+		System.out.println("넘어옴" + workspace);
 		workspace.setUserNo(workspace.getUserNums().get(0));
-		
-		// admin
 		workspacesRepository.insert(workspace);
-		Long workspaceNo = workspace.getNo();
-		HashMap<String, Long> map = new HashMap<>();
-		map.put("userNo", workspace.getUserNo());
-		map.put("workspaceNo", workspaceNo);
-		map.put("userRole", 0L); // 워크스페이스 생성자면 0L, 초대받은 유저는 1L
-		workspaceUsersRepository.invite(map);
-		map.clear();
 		
+		Long workspaceNo = workspace.getNo();
+		Long userNo = workspace.getUserNo();
+		
+		workspaceUsers.setUserNo(userNo);
+		workspaceUsers.setWorkspaceNo(workspaceNo);
+		
+		System.out.println("inviteAdmin에 들어갈 것:" + workspaceUsers);
+		workspaceUsersRepository.inviteAdmin(workspaceUsers);		
+				
 		for(int i=1; i<workspace.getUserNums().size(); i++) {
-			workspace.setUserNo(workspace.getUserNums().get(i));
-			System.out.println(workspace);
-			map.put("userNo", workspace.getUserNo());
-			map.put("workspaceNo", workspaceNo);
-			map.put("userRole", 1L); // 워크스페이스 생성자면 0L, 초대받은 유저는 1L
-			System.out.println(workspace);
-			workspaceUsersRepository.invite(map);
-			map.clear();
+			// UserNums에서 하나씩 추출해서 번호만 바뀌면서 새로 추가
+			workspaceUsers.setUserNo(workspace.getUserNums().get(i));
+			System.out.println("inviteUser에 들어갈 것:" + workspaceUsers);
+			workspaceUsersRepository.inviteUser(workspaceUsers);
 		}	
 
 	}	
@@ -58,6 +56,7 @@ public class WorkspacesService {
 	}
 	
 	public void delete(Long workspaceNo) {
+		// 어드민이어야만 지울 수 있게 생각
 		workspacesRepository.delete(workspaceNo);
 	}	
 	
