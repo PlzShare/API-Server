@@ -1,6 +1,7 @@
 package com.douzone.weboard.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,18 +21,17 @@ import com.douzone.weboard.util.ApiResult;
 import com.douzone.weboard.vo.Channel;
 
 @RestController  // responsebody 생략가능
-@RequestMapping("/workspaces/channels")
+@RequestMapping("/workspaces/{wno}/channels")
 public class ChannelController {
 	
 	@Autowired
 	private ChannelService channelService;
 	
 	
-	@GetMapping("")
-	public ResponseEntity<ApiResult> getList(
-			@RequestParam Long wno){
+	@GetMapping({"", "/{cno}"})
+	public ResponseEntity<ApiResult> getList(@PathVariable("wno") Long wno, @PathVariable(value = "cno",required = false) Long cno){
+//		if(cno == null) cno = 		
 		List<Channel> list = channelService.getList(wno);
-		
 		return new ResponseEntity<ApiResult>(ApiResult.success(list), HttpStatus.OK);
 	}
 	

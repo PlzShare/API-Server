@@ -3,7 +3,7 @@
 <mapper namespace="workspaceUsers">
 	<select id="findUser" parameterType="Long" resultType="map">
 		<![CDATA[
-			select b.id as id, a.user_no as userNo , b.nickname
+			select b.id as id, a.user_no as userNo, nickname
 				from workspace_user a, user b
 				where a.user_no = b.no
 				and a.workspace_no = #{workspaceNo}
