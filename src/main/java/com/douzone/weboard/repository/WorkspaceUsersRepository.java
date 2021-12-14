@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.douzone.weboard.vo.ChangeUser;
 import com.douzone.weboard.vo.WorkspaceUsers;
@@ -35,6 +36,7 @@ public class WorkspaceUsersRepository {
 		return count == 1;
 	}
 	
+	@Transactional // 하나의 작업 단위로 인식해 메소드 안의 인자가 하나라도 에러가 나면 실행이 되지 않는다.
 	public boolean changeRole(ChangeUser changeUser) {
 		int AUCount = sqlSession.update("workspaceUsers.changeRoleAU", changeUser);
 		int UACount = sqlSession.update("workspaceUsers.changeRoleUA", changeUser);
