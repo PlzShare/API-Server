@@ -50,8 +50,8 @@ public class UserController {
 	}
 	
 	// userNo 가져오기
-	@GetMapping("/{userNo}")
-	public ResponseEntity<ApiResult> getUser(@PathVariable("userNo") Long userNo){
+	@GetMapping("")
+	public ResponseEntity<ApiResult> getUser(@RequestParam Long userNo){
 		User user = userService.getUser(userNo);
 		if(user == null) {
 		return new ResponseEntity<ApiResult>(ApiResult.fail("없음"),HttpStatus.NOT_FOUND);
@@ -60,8 +60,11 @@ public class UserController {
 	}
 	
 	// 회원정보 수정
-	@PutMapping("/{userNo}")
-	public ResponseEntity<ApiResult> update(User user, @PathVariable Long userNo , @RequestParam(value="file",required = false) MultipartFile file) {
+	@PutMapping("")
+	public ResponseEntity<ApiResult> update(
+			@RequestBody User user,
+			@RequestParam Long userNo,
+			@RequestParam(value="file",required = false) MultipartFile file) {
 		
 		String url = FileuploadService.restoreImage(file, "/user/profile");
 		
@@ -80,8 +83,8 @@ public class UserController {
 	}
 	
 	// 회원탈퇴
-	@DeleteMapping("/{userNo}")
-	public ResponseEntity<ApiResult> delete(@PathVariable Long userNo){
+	@DeleteMapping("")
+	public ResponseEntity<ApiResult> delete(@RequestParam Long userNo){
 	
 		userService.delete(userNo);
 		
@@ -89,7 +92,7 @@ public class UserController {
 	}
 	
 	// 유저 검색 
-	@GetMapping("")
+	@GetMapping("/search")
 	public ResponseEntity<ApiResult> getList(SearchInfo searchInfo){
 		// System.out.println(searchInfo);
 		List<User> list = userService.getList(searchInfo);

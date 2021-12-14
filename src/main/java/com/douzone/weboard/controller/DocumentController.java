@@ -29,8 +29,9 @@ public class DocumentController {
 	
 	@GetMapping("")
 	public ResponseEntity<ApiResult> getList(@PathVariable("chNo") Long channelNo, @RequestBody Optional<Document> document){
-		
-		return new ResponseEntity<ApiResult>(ApiResult.success(documentService.findAll(document.orElse(new Document()))), HttpStatus.OK);
+		Document doc = document.orElse(new Document());
+		doc.setChannelNo(channelNo);
+		return new ResponseEntity<ApiResult>(ApiResult.success(documentService.findAll(doc)), HttpStatus.OK);
 	}
 	
 	@GetMapping("/{docNo}")
@@ -45,9 +46,9 @@ public class DocumentController {
 	
 	@PostMapping("")
 	public ResponseEntity<ApiResult> insert(@RequestBody Document doc, @AuthUser User authUser){	
-		authUser.setNo(1L);
+		authUser.setNo(2L);
 		doc.setUserNo(authUser.getNo());
-		
+		System.out.println(doc);
 		boolean result = documentService.add(doc);		
 		
 		ResponseEntity<ApiResult> response = result? new ResponseEntity<>(ApiResult.success(true), HttpStatus.OK)
