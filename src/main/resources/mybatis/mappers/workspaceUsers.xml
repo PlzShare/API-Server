@@ -3,7 +3,7 @@
 <mapper namespace="workspaceUsers">
 	<select id="findUser" parameterType="Long" resultType="map">
 		<![CDATA[
-			select b.id as id, a.user_no as userNo, nickname
+			select b.id as id, a.user_no as userNo, nickname, role
 				from workspace_user a, user b
 				where a.user_no = b.no
 				and a.workspace_no = #{workspaceNo}
@@ -19,7 +19,7 @@
 	
 	<insert id="inviteUser" parameterType="workspaceUsers">
 		<![CDATA[
-			insert into workspace_user(user_no, workspace_no, reg_date) values(#{userNo}, #{workspaceNo}, now());
+			insert into workspace_user(user_no, workspace_no) values(#{userNo}, #{workspaceNo});
 		]]>
 	</insert>
 	 

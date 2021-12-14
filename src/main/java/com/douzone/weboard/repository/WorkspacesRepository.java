@@ -47,4 +47,9 @@ public class WorkspacesRepository {
 		return count == 1;
 	}
 
+	public Workspaces find(Long wno) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("workspace.find", wno);
+	}
+
 }
