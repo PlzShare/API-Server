@@ -31,7 +31,7 @@
 		]]>
 	</delete>
 	
-	<update id="changeRoleUA" parameterType="changeUser">
+	<update id="changeRoleAU" parameterType="changeUser">
 		<![CDATA[
 		update workspace_user set role = 'user'
 		where role = 'admin'
@@ -40,7 +40,7 @@
 		]]>
 	</update>
 	
-	<update id="changeRoleAU" parameterType="changeUser">
+	<update id="changeRoleUA" parameterType="changeUser">
 		<![CDATA[
 		update workspace_user set role = 'admin'
 		where role = 'user'
