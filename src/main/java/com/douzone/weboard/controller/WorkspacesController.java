@@ -107,9 +107,11 @@ public class WorkspacesController {
 			@PathVariable("workspaceNo") Long workspaceNo,
 			@PathVariable("userNo") Long userNo){
 		
-		WorkspaceUsers workspaceUsers = new WorkspaceUsers();
-		workspaceUsers.setUserNo(userNo);
-		workspaceUsers.setWorkspaceNo(workspaceNo);
+		WorkspaceUsers workspaceUsers = 
+				WorkspaceUsers.builder()
+							  .userNo(userNo)
+							  .workspaceNo(workspaceNo)
+							  .build();
 		
 		workspaceUsersService.leave(workspaceUsers);
 		
