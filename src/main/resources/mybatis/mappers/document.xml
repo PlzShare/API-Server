@@ -31,9 +31,8 @@
 		from document
 		where channel_no = #{channelNo}
 	</select>
-	
 	<select id="find" parameterType="long" resultType="document">
-		select no, title, created_at, updated_at, user_no, is_pinned
+		select no, title, created_at, updated_at, user_no, is_pinned, contents
 		from document
 		where no = #{no}
 	</select>
