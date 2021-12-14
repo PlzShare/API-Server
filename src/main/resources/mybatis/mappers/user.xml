@@ -26,11 +26,19 @@
 	</select>
 
 	<update id="update" parameterType="user">
-		<![CDATA[
 		update user 
-		set nickname=#{nickname }, profile =#{profile} ,password=#{password }
+		set 
+			name = name
+			<if test="nickname != null and nickname != ''">
+				,nickname=#{nickname }
+			</if>
+			<if test="profile != null and profile != ''">
+				,profile =#{profile}
+			</if>
+			<if test="password != null and password != ''">
+				,password=#{password }
+			</if>		
 		where no=#{no }
-		]]>
 	</update>
 	
 	<update id="delete" parameterType="long">

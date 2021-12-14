@@ -23,5 +23,5 @@ public class Workspaces {
 	private String createdAt;
 	private Long userNo;
 	// 테스트중
-//	private List<Long> userNums;
+	private List<Long> userNums;
 }

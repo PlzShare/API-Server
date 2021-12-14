@@ -24,31 +24,26 @@ public class WorkspacesService {
 		return workspacesRepository.findAll(userNo);
 	}
 	
-	public void insert(Workspaces workspace, List<Long> list) {
-		// admin
+	public void insert(Workspaces workspace) {
+		WorkspaceUsers workspaceUsers = new WorkspaceUsers();
+
+		System.out.println("넘어옴" + workspace);
+		workspace.setUserNo(workspace.getUserNums().get(0));
 		workspacesRepository.insert(workspace);
+		
 		Long workspaceNo = workspace.getNo();
 		Long userNo = workspace.getUserNo();
 		
-		WorkspaceUsers workspaceUsers = new WorkspaceUsers();
-		workspaceUsers.setWorkspaceNo(workspaceNo);
 		workspaceUsers.setUserNo(userNo);
-		workspaceUsersRepository.inviteAdmin(workspaceUsers);
-
-//		HashMap<String, Long> map = new HashMap<>();
-//		map.put("userNo", workspace.getUserNo());
-//		map.put("workspaceNo", workspaceNo);
-//		map.put("userRole", 0L); // 워크스페이스 생성자면 0L, 초대받은 유저는 1L
+		workspaceUsers.setWorkspaceNo(workspaceNo);
 		
-		for(int i=1; i<list.size(); i++) {
-			workspaceUsers.setUserNo(list.get(i));
-//			
-//			workspace.setUserNo(list.get(i));
-//			System.out.println(workspace);
-//			map.put("userNo", workspace.getUserNo());
-//			map.put("workspaceNo", workspaceNo);
-//			map.put("userRole", 1L); // 워크스페이스 생성자면 0L, 초대받은 유저는 1L
-			System.out.println(workspaceUsers);
+		System.out.println("inviteAdmin에 들어갈 것:" + workspaceUsers);
+		workspaceUsersRepository.inviteAdmin(workspaceUsers);		
+				
+		for(int i=1; i<workspace.getUserNums().size(); i++) {
+			// UserNums에서 하나씩 추출해서 번호만 바뀌면서 새로 추가
+			workspaceUsers.setUserNo(workspace.getUserNums().get(i));
+			System.out.println("inviteUser에 들어갈 것:" + workspaceUsers);
 			workspaceUsersRepository.inviteUser(workspaceUsers);
 		}	
 
@@ -59,6 +54,7 @@ public class WorkspacesService {
 	}
 	
 	public void delete(Long workspaceNo) {
+		// 어드민이어야만 지울 수 있게 생각
 		workspacesRepository.delete(workspaceNo);
 	}	
 	

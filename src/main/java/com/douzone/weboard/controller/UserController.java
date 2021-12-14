@@ -61,12 +61,18 @@ public class UserController {
 	
 	// 회원정보 수정
 	@PutMapping("/{userNo}")
-	public ResponseEntity<ApiResult> update(User user, @PathVariable Long userNo , @RequestParam("file") MultipartFile file) {
+	public ResponseEntity<ApiResult> update(User user, @PathVariable Long userNo , @RequestParam(value="file",required = false) MultipartFile file) {
 		
 		String url = FileuploadService.restoreImage(file, "/user/profile");
 		
 		user.setNo(userNo);
 		user.setProfile(url);
+		
+		String nickname = user.getNickname() == null? null : user.getNickname().trim();
+		String password = user.getPassword() == null? null : user.getPassword().trim();
+
+		user.setNickname(nickname);
+		user.setPassword(password);
 		
 		userService.update(user);
 		

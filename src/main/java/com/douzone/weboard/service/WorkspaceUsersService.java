@@ -1,12 +1,12 @@
 package com.douzone.weboard.service;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.douzone.weboard.repository.WorkspaceUsersRepository;
+import com.douzone.weboard.vo.ChangeUser;
 import com.douzone.weboard.vo.WorkspaceUsers;
 
 @Service
@@ -21,24 +21,21 @@ public class WorkspaceUsersService {
 	}
 	
 
-	public void leave(HashMap<String, Long> map) {
-		workspaceUsersRepository.leave(map);	
+	public void leave(WorkspaceUsers workspaceUsers) {
+		System.out.println("떠난 사람(어드먼일때 고려할 것):" + workspaceUsers);
+		workspaceUsersRepository.leave(workspaceUsers);	
+	}
+	
+	public void inviteAdmin(WorkspaceUsers workspaceUsers) {
+		workspaceUsersRepository.inviteAdmin(workspaceUsers);
 	}
 	
 	public void inviteUser(WorkspaceUsers workspaceUsers) {
 		workspaceUsersRepository.inviteUser(workspaceUsers);
 	}
 	
-//	public void inviteAdmin(WorkspaceUsers workspaceUsers) {
-//		workspaceUsersRepository.inviteAdmin(workspaceUsers);
-//	}
-	
-//	public void invite(HashMap<String, Long> map) {
-//		workspaceUsersRepository.invite(map);
-//	}
-
-	public void changeRole(HashMap<String, Long> map) {
-		workspaceUsersRepository.changeRole(map);	
+	public void changeRole(ChangeUser changeUser) {
+		workspaceUsersRepository.changeRole(changeUser);	
 	}
 	
 }

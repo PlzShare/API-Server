@@ -17,6 +17,7 @@
 		<typeAlias type="com.douzone.weboard.vo.User" alias="User" />
 		<typeAlias type="com.douzone.weboard.vo.SearchInfo" alias="searchInfo" />
 		<typeAlias type="com.douzone.weboard.vo.Document" alias="document" />
+		<typeAlias type="com.douzone.weboard.vo.ChangeUser" alias="changeUser" />
 	</typeAliases>
 
 	<mappers>

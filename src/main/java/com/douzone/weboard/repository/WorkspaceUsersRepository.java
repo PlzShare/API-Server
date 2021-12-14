@@ -1,12 +1,12 @@
 package com.douzone.weboard.repository;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.douzone.weboard.vo.ChangeUser;
 import com.douzone.weboard.vo.WorkspaceUsers;
 
 @Repository
@@ -29,20 +29,15 @@ public class WorkspaceUsersRepository {
 		int count = sqlSession.insert("workspaceUsers.inviteUser", workspaceUsers);
 		return count == 1;
 	}
-	
-//	public boolean invite(HashMap<String, Long> map) {
-//		int count = sqlSession.insert("workspaceUsers.invite", map);
-//		return count == 1;
-//	}
 
-	public boolean leave(HashMap<String, Long> map) {
-		int count = sqlSession.update("workspaceUsers.leave", map);
+	public boolean leave(WorkspaceUsers workspaceUsers) {
+		int count = sqlSession.update("workspaceUsers.leave", workspaceUsers);
 		return count == 1;
 	}
 	
-	public boolean changeRole(HashMap<String, Long> map) {
-		int AUCount = sqlSession.update("workspaceUsers.changeRoleAU", map);
-		int UACount = sqlSession.update("workspaceUsers.changeRoleUA", map);
+	public boolean changeRole(ChangeUser changeUser) {
+		int AUCount = sqlSession.update("workspaceUsers.changeRoleAU", changeUser);
+		int UACount = sqlSession.update("workspaceUsers.changeRoleUA", changeUser);
 		return (AUCount * UACount) == 1;
 	}
 }
