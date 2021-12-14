@@ -26,7 +26,6 @@ public class WorkspacesService {
 	
 	public void insert(Workspaces workspace) {
 		
-		
 		WorkspaceUsers workspaceUsers = new WorkspaceUsers();
 
 		System.out.println("넘어옴" + workspace);
