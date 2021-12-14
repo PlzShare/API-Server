@@ -34,7 +34,7 @@ public class WorkspacesController {
 	// main
 	@GetMapping("")
 	public ResponseEntity<ApiResult> main(
-			@RequestParam Long uno){
+			@RequestParam("userNo") Long uno){
 		List<Workspaces> list = workspacesService.findAll(uno);
 		return new ResponseEntity<ApiResult>(ApiResult.success(list), HttpStatus.OK); // 리턴 여러개로 정상동작 / 오류동작으로 분기
 	}
