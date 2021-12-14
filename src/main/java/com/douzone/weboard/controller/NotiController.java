@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.douzone.weboard.service.NotiService;
@@ -17,14 +18,14 @@ import com.douzone.weboard.vo.Noti;
 import com.douzone.weboard.vo.User;
 
 @RestController
-@RequestMapping("/noti")
+@RequestMapping("/noti/test")
 public class NotiController {
 	
 	@Autowired
 	private NotiService notiService;
 	
 	
-	@PostMapping("/test")
+	@PostMapping("")
 	public ResponseEntity<ApiResult> insertNoti(){
 		Noti noti = Noti.builder()
 			.sender(1L)
@@ -38,8 +39,8 @@ public class NotiController {
 		
 	}
 	
-	@DeleteMapping("/test/{no}")
-	public ResponseEntity<ApiResult> deleteNoti(@PathVariable("no") Long no){
+	@DeleteMapping("")
+	public ResponseEntity<ApiResult> deleteNoti(@RequestParam Long no){
 		
 		notiService.deleteNotiUser(no);
 		return new ResponseEntity<ApiResult>(ApiResult.success(no), HttpStatus.OK);
