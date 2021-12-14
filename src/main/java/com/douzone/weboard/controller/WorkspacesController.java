@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.douzone.weboard.service.WorkspaceUsersService;
@@ -32,10 +33,10 @@ public class WorkspacesController {
 	private WorkspaceUsersService workspaceUsersService;
 	
 	// main
-	@GetMapping("/{userNo}")
+	@GetMapping("")
 	public ResponseEntity<ApiResult> main(
-			@PathVariable("userNo") Long userNo){
-		List<Workspaces> list = workspacesService.findAll(userNo);
+			@RequestParam Long uno){
+		List<Workspaces> list = workspacesService.findAll(uno);
 		return new ResponseEntity<ApiResult>(ApiResult.success(list), HttpStatus.OK); // 리턴 여러개로 정상동작 / 오류동작으로 분기
 	}
 
@@ -56,17 +57,17 @@ public class WorkspacesController {
 	}
 	
 	// delete
-	@DeleteMapping("/{workspaceNo}")
+	@DeleteMapping("")
 	public ResponseEntity<ApiResult> delete(
-			@PathVariable("workspaceNo") Long workspaceNo){
+			@RequestParam Long wno){
 		// 워크스페이스 관리자가 워크스페이스 삭제 가능
-		workspacesService.delete(workspaceNo);
+		workspacesService.delete(wno);
 		return new ResponseEntity<ApiResult>(HttpStatus.OK);
 	}
 	
-	@GetMapping("/search/{userNo}")
+	@GetMapping("/search")
 	public ResponseEntity<ApiResult> search(
-			@PathVariable("userNo") Long userNo){
+			@RequestParam Long userNo){
 		
 		// 테스트용 키워드 입력.
 		String test_keyword = "";
@@ -83,14 +84,14 @@ public class WorkspacesController {
 	
 	////////////////////////////// /workspace-users /////////////////////////////////////////
 	
-	@GetMapping("/workspace-users/{userNo}/{workspaceNo}")
+	@GetMapping("/workspace-users")
 	public ResponseEntity<ApiResult> getlist(
-			@PathVariable("userNo") Long userNo, 
-			@PathVariable("workspaceNo") Long workspaceNo){
+			@RequestParam Long uno, 
+			@RequestParam Long wno){
 		
 		WorkspaceUsers workspaceUsers = new WorkspaceUsers();
-		workspaceUsers.setUserNo(userNo);
-		List<WorkspaceUsers> result = workspaceUsersService.getUser(workspaceNo);
+		workspaceUsers.setUserNo(uno);
+		List<WorkspaceUsers> result = workspaceUsersService.getUser(wno);
 				
 		return new ResponseEntity<ApiResult>(ApiResult.success(result), HttpStatus.OK);
 	}
@@ -102,15 +103,15 @@ public class WorkspacesController {
 		return new ResponseEntity<ApiResult>(HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/workspace-users/{userNo}/{workspaceNo}")
+	@DeleteMapping("/workspace-users")
 	public ResponseEntity<ApiResult> leave(
-			@PathVariable("workspaceNo") Long workspaceNo,
-			@PathVariable("userNo") Long userNo){
+			@RequestParam Long uno, 
+			@RequestParam Long wno){
 		
 		WorkspaceUsers workspaceUsers = 
 				WorkspaceUsers.builder()
-							  .userNo(userNo)
-							  .workspaceNo(workspaceNo)
+							  .userNo(uno)
+							  .workspaceNo(wno)
 							  .build();
 		
 		workspaceUsersService.leave(workspaceUsers);
