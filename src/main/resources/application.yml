@@ -53,7 +53,10 @@ mybatis:
 logging:
    config: classpath:logback.xml 
 
-
+# cumtom property
+authServer:
+   url: http://localhost:7777/auth
+---
 # production profile - spring boot configuration
 spring:
    config:
