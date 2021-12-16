@@ -12,6 +12,13 @@
 		where a.user_no = #{userNo};
 		]]>
 	</select>
+	<select id="find" parameterType="long" resultType="workspaces">
+		<![CDATA[
+		select no, name, created_at, user_no
+		from workspace
+		where no = #{wno};
+		]]>
+	</select>
 	
 	<insert id="insert" parameterType="workspaces" useGeneratedKeys="true" keyProperty="no">
 		<![CDATA[
@@ -24,8 +31,7 @@
 		<![CDATA[
 		update workspace
 		set name = #{name}
-		where user_no = #{userNo}
-		and no = #{no };
+		where no = #{no};
 		]]>
 	</insert>
 		

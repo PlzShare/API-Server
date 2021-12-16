@@ -23,10 +23,8 @@ import com.douzone.weboard.vo.Channel;
 @RestController  // responsebody 생략가능
 @RequestMapping("/workspaces/{wno}/channels")
 public class ChannelController {
-	
 	@Autowired
 	private ChannelService channelService;
-	
 	
 	@GetMapping({"", "/{cno}"})
 	public ResponseEntity<ApiResult> getList(@PathVariable("wno") Long wno, @PathVariable(value = "cno",required = false) Long cno){
@@ -37,7 +35,7 @@ public class ChannelController {
 	
 	@PostMapping("")
 	public ResponseEntity<ApiResult> addChannel(
-			@RequestParam Long wno,
+			@PathVariable Long wno,
 			@RequestBody Channel channel){
 		channel.setWorkspaceNo(wno);
 		channelService.addChannel(channel);
@@ -46,18 +44,18 @@ public class ChannelController {
 	}
 	
 	
-	@DeleteMapping("")
+	@DeleteMapping("/{cno}")
 	public ResponseEntity<ApiResult> deleteChannel(
-			@RequestParam Long won, 
-			@RequestParam Long cno){
+			@PathVariable Long wno, 
+			@PathVariable Long cno){
 		channelService.deleteChannel(cno);
 		return new ResponseEntity<ApiResult>(ApiResult.success(cno), HttpStatus.OK);
 	}
 	
-	@PutMapping("")
+	@PutMapping("/{cno}")
 	public ResponseEntity<ApiResult> updateChannel(
-			@RequestParam Long won, 
-			@RequestParam Long cno, 
+			@PathVariable Long wno, 
+			@PathVariable Long cno, 
 			@RequestBody Channel channel){
 		channel.setNo(cno);
 		channelService.updateChannel(channel);

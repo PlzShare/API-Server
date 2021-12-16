@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.douzone.weboard.repository.WorkspaceUsersRepository;
 import com.douzone.weboard.vo.ChangeUser;
 import com.douzone.weboard.vo.WorkspaceUsers;
+import com.douzone.weboard.vo.Workspaces;
 
 @Service
 public class WorkspaceUsersService {
@@ -17,6 +18,9 @@ public class WorkspaceUsersService {
 
 	public List<WorkspaceUsers> getUser(Long wno) {
 		List<WorkspaceUsers> workspaceUserList = workspaceUsersRepository.findUser(wno);
+		System.out.println(wno);
+		System.out.println(workspaceUserList);
+		
 		return workspaceUserList;
 	}
 
@@ -28,9 +32,14 @@ public class WorkspaceUsersService {
 	public void inviteAdmin(WorkspaceUsers workspaceUsers) {
 		workspaceUsersRepository.inviteAdmin(workspaceUsers);
 	}
-
-	public void inviteUser(WorkspaceUsers workspaceUsers) {
-		workspaceUsersRepository.inviteUser(workspaceUsers);
+	public void inviteUser(Workspaces workspaces) {
+		WorkspaceUsers workspaceUsers = new WorkspaceUsers();
+		
+		workspaceUsers.setWorkspaceNo(workspaces.getNo());
+		workspaces.getUserNums().forEach((userNo) -> {
+			workspaceUsers.setUserNo(userNo);
+			workspaceUsersRepository.inviteUser(workspaceUsers);
+		});
 	}
 
 	public void changeRole(ChangeUser chUser) {
