@@ -1,7 +1,7 @@
 # active spring boot profile
 spring:
    profiles:
-      active: ds
+      active: sh
 
    # devtools - live reload
    devtools:

@@ -23,6 +23,7 @@
 	<mappers>
 		<mapper resource="mybatis/mappers/channels.xml" />
 		<mapper resource="mybatis/mappers/noti.xml" />
+		<mapper resource="mybatis/mappers/notiuser.xml" />
 		<mapper resource="mybatis/mappers/user.xml" />
 		<mapper resource="mybatis/mappers/document.xml" />
 		<mapper resource="mybatis/mappers/workspaces.xml" />

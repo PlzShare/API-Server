@@ -1,5 +1,7 @@
 package com.douzone.weboard.vo;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,4 +21,6 @@ public class Noti {
 	private Long workspaceNo;
 	private String contents;
 	private Long sender;
+	
+	private List<Long> userNums;
 }
