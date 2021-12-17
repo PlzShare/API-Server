@@ -2,17 +2,19 @@ package com.douzone.weboard.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.douzone.weboard.service.FileuploadService;
@@ -21,32 +23,50 @@ import com.douzone.weboard.util.ApiResult;
 import com.douzone.weboard.vo.SearchInfo;
 import com.douzone.weboard.vo.User;
 
-import lombok.RequiredArgsConstructor;
-
-@RequiredArgsConstructor
 @RestController
 @RequestMapping("/users")
 public class UserController {
 	private final UserService userService;
-	private final FileuploadService FileuploadService;
+	private final FileuploadService FileuploadService;	
+	@Value("${authServer.url}")
+	private String authServerUrl;
+	
+	
+	public UserController(UserService userService, FileuploadService fileuploadService) {
+		this.userService = userService;
+		FileuploadService = fileuploadService;
+	}
 	
 	//회원가입
 	@PostMapping("/join")
 	public ResponseEntity<ApiResult> joinUser(@RequestBody User user){
 		userService.join(user);
-		return new ResponseEntity<ApiResult>(ApiResult.success(user),HttpStatus.OK);
-		
-	}
+		return new ResponseEntity<ApiResult>(ApiResult.success(user),HttpStatus.OK);	
+	} 
 	
 	// 로그인
 	@PostMapping("/login")
 	public ResponseEntity<ApiResult> login(@RequestBody User user){
-		User login = userService.login(user);
+		User login = userService.login(user);		
+		
 		if(login == null) {
 			return new ResponseEntity<ApiResult>(ApiResult.fail("id, password 불일치"),HttpStatus.UNAUTHORIZED);			
 		}
 		
-		return new ResponseEntity<ApiResult>(ApiResult.success(user),HttpStatus.OK);
+		
+		RestTemplate restTemplate = new RestTemplate();
+		
+		ResponseEntity<String> entity = restTemplate.postForEntity(authServerUrl + "/get-token", login, String.class);
+		String token = entity.getHeaders().get("Authorization").get(0);
+		
+		System.out.println(entity);
+		System.out.println("=========================");
+		System.out.println(token);
+		System.out.println("=========================");
+		
+		return ResponseEntity.ok()
+				.header("Authorization", token)
+				.body(ApiResult.success(login));
 	}
 	
 	// userNo 가져오기
@@ -108,4 +128,6 @@ public class UserController {
 		return new ResponseEntity<ApiResult>(ApiResult.success(userNo), HttpStatus.OK);
 
 	}
+
+	
 }
