@@ -38,6 +38,7 @@ public class WorkspacesController {
 		List<Workspaces> list = workspacesService.findAll(uno);
 		return new ResponseEntity<ApiResult>(ApiResult.success(list), HttpStatus.OK); // 리턴 여러개로 정상동작 / 오류동작으로 분기
 	}
+	
 	@GetMapping("/{wno}")
 	public ResponseEntity<ApiResult> getWorkspace(@PathVariable("wno") Long wno){
 		return new ResponseEntity<ApiResult>(ApiResult.success(workspacesService.find(wno)), HttpStatus.OK);

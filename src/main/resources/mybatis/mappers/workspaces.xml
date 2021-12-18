@@ -12,6 +12,7 @@
 		where a.user_no = #{userNo};
 		]]>
 	</select>
+	
 	<select id="find" parameterType="long" resultType="workspaces">
 		<![CDATA[
 		select no, name, created_at, user_no
