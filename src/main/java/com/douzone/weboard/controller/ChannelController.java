@@ -28,7 +28,6 @@ public class ChannelController {
 	
 	@GetMapping({"", "/{cno}"})
 	public ResponseEntity<ApiResult> getList(@PathVariable("wno") Long wno, @PathVariable(value = "cno",required = false) Long cno){
-//		if(cno == null) cno = 		
 		List<Channel> list = channelService.getList(wno);
 		return new ResponseEntity<ApiResult>(ApiResult.success(list), HttpStatus.OK);
 	}
