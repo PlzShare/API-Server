@@ -18,4 +18,5 @@ public class NotiUser {
 	private Long sendTo;
 	private Long notiNo;
 	private Long isRead;
+
 }

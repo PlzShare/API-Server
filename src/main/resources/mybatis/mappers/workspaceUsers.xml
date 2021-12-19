@@ -35,7 +35,7 @@
 		<![CDATA[
 		update workspace_user set role = 'user'
 		where role = 'admin'
-		  and user_no = #{adminNo}
+		  and user_no = #{adminNo }
 		  and workspace_no = #{workspaceNo}
 		]]>
 	</update>
@@ -44,7 +44,7 @@
 		<![CDATA[
 		update workspace_user set role = 'admin'
 		where role = 'user'
-		  and user_no = #{userNo}
+		  and user_no = #{userNo }
 		  and workspace_no = #{workspaceNo}
 		]]>
 	</update>

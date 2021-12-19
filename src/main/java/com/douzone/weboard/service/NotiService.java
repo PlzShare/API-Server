@@ -15,20 +15,10 @@ public class NotiService {
 	@Autowired
 	private NotiRepository notiRepository;
 	
-	
-	// 최초 노티 & 유저 노티
-	public void addNoti(Noti noti, List<User> userList) {
-		notiRepository.insertNoti(noti);
+	public List<NotiUser> getNoti(Long uno) {
+		List<NotiUser> notiList = notiRepository.findNoti(uno);
 		
-		for(User user : userList) {
-			NotiUser notiUser = NotiUser.builder()
-									.notiNo(noti.getNo())
-									.sendTo(user.getNo())
-									.build();
-			
-			notiRepository.insertNotiUser(notiUser);			
-		}
-		return;		
+		return notiList;
 	}
 	
 	public boolean deleteNotiUser(Long no) {

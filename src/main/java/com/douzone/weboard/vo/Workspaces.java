@@ -24,4 +24,5 @@ public class Workspaces {
 	private Long userNo;
 	// 테스트중
 	private List<Long> userNums;
+	private String inviteMember;
 }

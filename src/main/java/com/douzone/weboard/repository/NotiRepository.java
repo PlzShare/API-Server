@@ -34,8 +34,8 @@ public class NotiRepository {
 	}
 	
 	// 분류별 알림
-	public List<Noti> findNoti(Long uno){
-		return sqlSession.selectList("noti.findNoti", uno);
+	public List<NotiUser> findNoti(Long uno){
+		return sqlSession.selectList("notiuser.findNoti", uno);
 	}
 	
 }

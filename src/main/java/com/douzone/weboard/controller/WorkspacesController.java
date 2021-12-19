@@ -124,10 +124,10 @@ public class WorkspacesController {
 	
 	@PutMapping("/workspace-users/change-role")
 	public ResponseEntity<ApiResult> changeRole(
+
 			@RequestBody ChangeUser changeUser){
 		
 		workspaceUsersService.changeRole(changeUser);
-		
 		return new ResponseEntity<ApiResult>(HttpStatus.OK);
 	}
 	

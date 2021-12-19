@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="notiuser">
+	<select id="findNoti" parameterType="Long" resultType="map">
+		<![CDATA[
+			    select a.contents as contents, c.name as name
+					from noti a, noti_user b, workspace c
+				    where a.no = b.noti_no
+				    and c.no = a.workspace_no
+					and b.send_to = #{sendTo }
+				    order by b.no desc
+		]]>
+	</select>
+
+</mapper>
