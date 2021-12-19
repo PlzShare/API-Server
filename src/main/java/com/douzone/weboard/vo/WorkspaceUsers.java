@@ -1,5 +1,7 @@
 package com.douzone.weboard.vo;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,5 +22,12 @@ public class WorkspaceUsers {
 	private String inviteDate;
 	private String regDate;
 	private String role;
+	
+	
+	private String userid;
+	private String nickname;
+	private List<Long> userNums;
+	
+	private Long notiNo;
 	
 }

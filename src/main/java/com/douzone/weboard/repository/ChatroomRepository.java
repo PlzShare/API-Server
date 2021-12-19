@@ -22,4 +22,5 @@ public class ChatroomRepository {
 		int count = sqlSession.insert("chatroom.insert", chatroom);
 		return count == 1;
 	}
+
 }

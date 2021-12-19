@@ -17,4 +17,5 @@ import lombok.ToString;
 public class ChatroomUsers {
 	private Long chatroomNo;
 	private Long userNo;
+
 }
