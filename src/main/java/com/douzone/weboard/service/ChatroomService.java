@@ -30,17 +30,11 @@ public class ChatroomService {
 		ChatroomUsers chatroomUsers = new ChatroomUsers();
 		chatroomRepository.insert(chatroom);
 		
-		Long chatroomNo = chatroom.getNo();
-		Long UserNo = chatroom.getUserNums().get(0);
-		
-		chatroomUsers.setChatroomNo(chatroomNo);
-		chatroomUsers.setUserNo(UserNo);
-		chatroomUsersRepository.insert(chatroomUsers);
-				
-		for(int i=1; i<chatroom.getUserNums().size(); i++) {
-			// 초대되었다고 알람을 뿌리는 구간
-			chatroomUsers.setUserNo(chatroom.getUserNums().get(i));
+		chatroomUsers.setChatroomNo(chatroom.getNo());
+		chatroom.getUserNums().forEach((userNo) -> {
+			chatroomUsers.setUserNo(userNo);
 			chatroomUsersRepository.insert(chatroomUsers);
-		}	
+		});
+
 	}
 }
