@@ -73,8 +73,8 @@ public class UserController {
 	
 	// userNo 가져오기
 	@GetMapping("")
-	public ResponseEntity<ApiResult> getUser(@RequestParam Long userNo){
-		User user = userService.getUser(userNo);
+	public ResponseEntity<ApiResult> getUser(@RequestParam Long uno){
+		User user = userService.getUser(uno);
 		if(user == null) {
 		return new ResponseEntity<ApiResult>(ApiResult.fail("없음"),HttpStatus.NOT_FOUND);
 		}
@@ -85,12 +85,12 @@ public class UserController {
 	@PutMapping("")
 	public ResponseEntity<ApiResult> update(
 			@RequestBody User user,
-			@RequestParam Long userNo,
+			@RequestParam Long uno,
 			@RequestParam(value="file",required = false) MultipartFile file) {
 		
 		String url = FileuploadService.restoreImage(file, "/user/profile");
 		
-		user.setNo(userNo);
+		user.setNo(uno);
 		user.setProfile(url);
 		
 		String nickname = user.getNickname() == null? null : user.getNickname().trim();
