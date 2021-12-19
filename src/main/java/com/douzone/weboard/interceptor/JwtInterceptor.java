@@ -43,6 +43,7 @@ public class JwtInterceptor implements HandlerInterceptor {
 			try {
 				ResponseEntity<String> responseEntity = restTemplate.exchange(authServerUrl + "/validate", HttpMethod.GET,
 						requestEntity, String.class);
+				System.out.println(responseEntity.getBody());
 				User authUser = objectMapper.readValue(responseEntity.getBody(), User.class);
 				request.setAttribute("authUser", authUser);
 				return true;
