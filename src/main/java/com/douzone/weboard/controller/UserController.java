@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.douzone.weboard.annotation.AuthUser;
 import com.douzone.weboard.service.FileuploadService;
 import com.douzone.weboard.service.UserService;
 import com.douzone.weboard.util.ApiResult;
@@ -30,6 +31,7 @@ import com.douzone.weboard.vo.User;
 public class UserController {
 	private final UserService userService;
 	private final FileuploadService FileuploadService;	
+	
 	@Value("${authServer.url}")
 	private String authServerUrl;
 	
@@ -73,8 +75,8 @@ public class UserController {
 	
 	// userNo 가져오기
 	@GetMapping("")
-	public ResponseEntity<ApiResult> getUser(@RequestParam Long uno){
-		User user = userService.getUser(uno);
+	public ResponseEntity<ApiResult> getUser(@AuthUser User authUser){
+		User user = userService.getUser(authUser.getNo());
 		if(user == null) {
 		return new ResponseEntity<ApiResult>(ApiResult.fail("없음"),HttpStatus.NOT_FOUND);
 		}
@@ -84,13 +86,13 @@ public class UserController {
 	// 회원정보 수정
 	@PutMapping("")
 	public ResponseEntity<ApiResult> update(
-			@RequestBody User user,
-			@RequestParam Long uno,
+			User user,
+			@AuthUser User authUser,
 			@RequestParam(value="file",required = false) MultipartFile file) {
 		
 		String url = FileuploadService.restoreImage(file, "/user/profile");
 		
-		user.setNo(uno);
+		user.setNo(authUser.getNo());
 		user.setProfile(url);
 		
 		String nickname = user.getNickname() == null? null : user.getNickname().trim();
@@ -106,9 +108,9 @@ public class UserController {
 	
 	// 회원탈퇴
 	@DeleteMapping("")
-	public ResponseEntity<ApiResult> delete(@RequestParam Long userNo){
+	public ResponseEntity<ApiResult> delete(@AuthUser User authUser){
 	
-		userService.delete(userNo);
+		userService.delete(authUser.getNo());
 		
 		return new ResponseEntity<ApiResult>(ApiResult.success(true),HttpStatus.OK);
 	}
