@@ -94,18 +94,15 @@ public class UserController {
 			@RequestParam(value="file",required = false) MultipartFile file) {
 		
 
-		System.out.println("UserController ---------------------------------------------------------");
-		System.out.println(authUser);
 		String url = FileuploadService.restoreImage(file, "/user/profile");		
-
 		user.setNo(authUser.getNo());
 		user.setProfile(url);
 		
 		String nickname = user.getNickname() == null? null : user.getNickname().trim();
 		String password = user.getPassword() == null? null : user.getPassword().trim();
-
 		user.setNickname(nickname);
 		user.setPassword(password);
+		
 		System.out.println("-0-9-07-0897690758967");
 		System.out.println(user);
 		if(userService.update(user)) {
@@ -116,7 +113,7 @@ public class UserController {
 				authUser.setPassword(password);				
 			}
 			if(user.getProfile() != null && !user.getProfile().isEmpty()) {
-				authUser.setProfile(password);				
+				authUser.setProfile(user.getProfile());				
 			}
 			
 			
