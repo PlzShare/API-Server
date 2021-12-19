@@ -31,6 +31,14 @@
 		]]>
 	</delete>
 	
+	<delete id="deleteNotiUser" parameterType="workspaceUsers">
+		<![CDATA[
+			delete from workspace_user 
+				where user_no = #{userNo }
+				and workspace_no = #{workspaceNo }
+		]]>
+	</delete>
+	
 	<update id="changeRoleAU" parameterType="changeUser">
 		<![CDATA[
 		update workspace_user set role = 'user'

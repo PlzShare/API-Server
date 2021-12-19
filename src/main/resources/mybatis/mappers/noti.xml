@@ -20,5 +20,11 @@
 			delete from noti_user where no=#{no }
 		]]>
 	</delete>
+	
+	<delete id="deleteNoti" parameterType="Long">
+		<![CDATA[
+			delete from noti_user where no=#{no }
+		]]>
+	</delete>
 
 </mapper>

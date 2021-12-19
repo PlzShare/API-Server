@@ -122,6 +122,18 @@ public class WorkspacesController {
 		return new ResponseEntity<ApiResult>(HttpStatus.OK);
 	}
 	
+	@DeleteMapping("/workspace_users/noti")
+	public ResponseEntity<ApiResult> deleteNotiUser(
+			@RequestParam Long nno,
+			@AuthUser User authUser){
+		
+		WorkspaceUsers workspaceUsers = new WorkspaceUsers();
+		workspaceUsers.setUserNo(authUser.getNo());
+		
+		workspaceUsersService.deleteNotiUser(workspaceUsers, nno);
+		return new ResponseEntity<ApiResult>(HttpStatus.OK);
+	}
+	
 	@PutMapping("/workspace-users/change-role")
 	public ResponseEntity<ApiResult> changeRole(
 
@@ -134,9 +146,10 @@ public class WorkspacesController {
 	
 	@PutMapping("/workspace_users")
 	public ResponseEntity<ApiResult> changeDate(@RequestBody WorkspaceUsers workspaceUsers){
-		System.out.println("으아긍강그아그엥엥뿡뿌뿡뿡" + workspaceUsers);
 		workspaceUsersService.changeDate(workspaceUsers);
 		return new ResponseEntity<ApiResult>(HttpStatus.OK);
 	}
+	
+	
 	
 }

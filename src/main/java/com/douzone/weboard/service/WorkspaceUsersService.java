@@ -37,6 +37,17 @@ public class WorkspaceUsersService {
 		System.out.println("떠난 사람(어드먼일때 고려할 것):" + workspaceUsers);
 		workspaceUsersRepository.leave(workspaceUsers);
 	}
+	
+	public void deleteNotiUser(WorkspaceUsers workspaceUsers, Long nno) {
+//		NotiUser notiUser = new NotiUser();
+		Long wno = notiRepository.findOneNoti(nno);
+		
+		workspaceUsers.setWorkspaceNo(wno);
+		workspaceUsersRepository.leave(workspaceUsers);
+		
+		notiRepository.deleteNoti(nno);
+	}
+	
 
 	public void inviteAdmin(WorkspaceUsers workspaceUsers) {
 		workspaceUsersRepository.inviteAdmin(workspaceUsers);
@@ -76,7 +87,6 @@ public class WorkspaceUsersService {
 		});
 
 		
-		
 	}
 
 	public void changeRole(ChangeUser chUser) {
@@ -86,7 +96,9 @@ public class WorkspaceUsersService {
 	public void changeDate(WorkspaceUsers workspaceUsers) {
 		NotiUser notiUser = new NotiUser();
 		workspaceUsersRepository.changeDate(workspaceUsers);
+		
 		notiUser.setNo(workspaceUsers.getNotiNo());
 		notiRepository.delete(notiUser);
 	}
+	
 }

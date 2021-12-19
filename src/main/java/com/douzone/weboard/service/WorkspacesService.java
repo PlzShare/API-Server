@@ -41,20 +41,16 @@ public class WorkspacesService {
 		WorkspaceUsers workspaceUsers = new WorkspaceUsers();
 		workspacesRepository.insert(workspace);
 
-		// 초대알림
-		Noti noti = new Noti();
-		NotiUser notiUser = new NotiUser();
-
-		notiUser.setNotiNo(noti.getNo());
-		workspace.getUserNums().forEach((userNo) -> {
-			notiUser.setSendTo(userNo);
-			notiRepository.insertNotiUser(notiUser);
-		});
 
 		// 워크스페이스 생성자 - Admin 설정
 		workspaceAdmin.setWorkspaceNo(workspace.getNo());
 		workspaceAdmin.setUserNo(workspace.getUserNo());
 		workspaceUsersRepository.inviteAdmin(workspaceAdmin);
+		
+		// 초대알림
+		Noti noti = new Noti();
+		NotiUser notiUser = new NotiUser();
+		
 
 		// 워크스페이스 유저 초대 - Users설정
 		workspaceUsers.setWorkspaceNo(workspace.getNo());
@@ -64,13 +60,20 @@ public class WorkspacesService {
 				workspaceUsers.setUserNo(userNo);
 				workspaceUsersRepository.inviteUser(workspaceUsers);
 			});
+			
 			noti.setType("workspace");
 			noti.setWorkspaceNo(workspace.getNo());
 
 			noti.setContents(workspace.getInviteMember() + "님이 " + (workspace.getName()) + " 워크스페이스로 초대하셨습니다.");
 			noti.setSender(workspace.getUserNo());
-
+			
 			notiRepository.insertNoti(noti);
+
+			notiUser.setNotiNo(noti.getNo());
+			workspace.getUserNums().forEach((userNo) -> {
+				notiUser.setSendTo(userNo);
+				notiRepository.insertNotiUser(notiUser);
+			});
 			
 		} else {
 			return;
