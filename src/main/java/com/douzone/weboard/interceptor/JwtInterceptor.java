@@ -45,6 +45,8 @@ public class JwtInterceptor implements HandlerInterceptor {
 						requestEntity, String.class);
 				User authUser = objectMapper.readValue(responseEntity.getBody(), User.class);
 				request.setAttribute("authUser", authUser);
+				System.out.println(authUser);
+				System.out.println("Jwt Interceptor");
 				return true;
 			}catch (RestClientException e) {
 				System.out.println(e);

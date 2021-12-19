@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.douzone.weboard.annotation.AuthUser;
 import com.douzone.weboard.service.WorkspaceUsersService;
 import com.douzone.weboard.service.WorkspacesService;
 import com.douzone.weboard.util.ApiResult;
-import com.douzone.weboard.util.AuthUser;
 import com.douzone.weboard.vo.ChangeUser;
 import com.douzone.weboard.vo.User;
 import com.douzone.weboard.vo.WorkspaceUsers;

@@ -8,6 +8,7 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
+import com.douzone.weboard.annotation.AuthUser;
 import com.douzone.weboard.vo.User;
 
 public class AuthUserArgumentResolver implements HandlerMethodArgumentResolver {
@@ -22,7 +23,6 @@ public class AuthUserArgumentResolver implements HandlerMethodArgumentResolver {
 	public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
 			NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
 		// TODO Auto-generated method stub
-		
 		return webRequest.getNativeRequest(HttpServletRequest.class).getAttribute("authUser");
 	}
 
