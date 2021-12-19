@@ -15,6 +15,7 @@ import com.douzone.weboard.vo.WorkspaceUsers;
 
 @Service
 public class ChannelService {
+	
 	@Autowired
 	private ChannelRepository channelRepository;
 	

@@ -35,9 +35,11 @@ public class WorkspaceUsersRepository {
 		return count == 1;
 	}
 	
+
 	public boolean changeRole(ChangeUser chUser) {
 		int AUCount = sqlSession.update("workspaceUsers.changeRoleAU", chUser);
 		int UACount = sqlSession.update("workspaceUsers.changeRoleUA", chUser);
+
 		return (AUCount * UACount) == 1;
 	}
 	

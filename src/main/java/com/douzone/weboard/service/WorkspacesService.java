@@ -77,6 +77,29 @@ public class WorkspacesService {
 		}
 	}
 
+//=======
+//		
+//		WorkspaceUsers workspaceUsers = new WorkspaceUsers();
+//		workspace.setUserNo(workspace.getUserNums().get(0));
+//		workspacesRepository.insert(workspace);
+//		
+//		Long workspaceNo = workspace.getNo();
+//		Long userNo = workspace.getUserNo();
+//		
+//		workspaceUsers.setUserNo(userNo);
+//		workspaceUsers.setWorkspaceNo(workspaceNo);
+//		
+//		workspaceUsersRepository.inviteAdmin(workspaceUsers);		
+//				
+//		for(int i=1; i<workspace.getUserNums().size(); i++) {
+//			// UserNums에서 하나씩 추출해서 번호만 바뀌면서 새로 추가
+//			workspaceUsers.setUserNo(workspace.getUserNums().get(i));
+//			workspaceUsersRepository.inviteUser(workspaceUsers);
+//		}	
+//
+//	}	
+//	
+//>>>>>>> 31b719e1bf7f78e09308dd568ba1c215263a96a4
 	public void update(Workspaces workspace) {
 		workspacesRepository.update(workspace);
 	}

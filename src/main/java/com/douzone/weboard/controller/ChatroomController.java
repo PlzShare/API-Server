@@ -35,4 +35,6 @@ public class ChatroomController {
 		chatroomService.insert(chatroom);
 		return new ResponseEntity<ApiResult>(ApiResult.success(chatroom),HttpStatus.OK);	
 	}
+
 }
+

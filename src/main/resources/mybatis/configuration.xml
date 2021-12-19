@@ -6,7 +6,7 @@
 	<settings>
 		<setting name="mapUnderscoreToCamelCase" value="true" />
 	</settings>
-
+	
 	<typeAliases>
 		<typeAlias type="com.douzone.weboard.vo.Document" alias="document"/>
 		<typeAlias type="com.douzone.weboard.vo.Workspaces" alias="workspaces"/>
@@ -21,7 +21,7 @@
 		<typeAlias type="com.douzone.weboard.vo.Chatroom" alias="chatroom" />
 		<typeAlias type="com.douzone.weboard.vo.ChatroomUsers" alias="chatroomUsers" />
 	</typeAliases>
-
+	
 	<mappers>
 		<mapper resource="mybatis/mappers/channels.xml" />
 		<mapper resource="mybatis/mappers/noti.xml" />

@@ -2,6 +2,8 @@ package com.douzone.weboard.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -53,7 +55,7 @@ public class UserController {
 			return new ResponseEntity<ApiResult>(ApiResult.fail("id, password 불일치"),HttpStatus.UNAUTHORIZED);			
 		}
 		
-		
+		// get-token
 		RestTemplate restTemplate = new RestTemplate();
 		
 		ResponseEntity<String> entity = restTemplate.postForEntity(authServerUrl + "/get-token", login, String.class);
@@ -71,8 +73,8 @@ public class UserController {
 	
 	// userNo 가져오기
 	@GetMapping("")
-	public ResponseEntity<ApiResult> getUser(@RequestParam Long userNo){
-		User user = userService.getUser(userNo);
+	public ResponseEntity<ApiResult> getUser(@RequestParam Long uno){
+		User user = userService.getUser(uno);
 		if(user == null) {
 		return new ResponseEntity<ApiResult>(ApiResult.fail("없음"),HttpStatus.NOT_FOUND);
 		}
@@ -83,12 +85,12 @@ public class UserController {
 	@PutMapping("")
 	public ResponseEntity<ApiResult> update(
 			@RequestBody User user,
-			@RequestParam Long userNo,
+			@RequestParam Long uno,
 			@RequestParam(value="file",required = false) MultipartFile file) {
 		
 		String url = FileuploadService.restoreImage(file, "/user/profile");
 		
-		user.setNo(userNo);
+		user.setNo(uno);
 		user.setProfile(url);
 		
 		String nickname = user.getNickname() == null? null : user.getNickname().trim();
@@ -124,10 +126,6 @@ public class UserController {
 	public ResponseEntity<ApiResult> checkUser(
 			@RequestBody User user){
 		Long userNo = userService.checkUser(user.getId());
-		System.out.println(userNo);		
 		return new ResponseEntity<ApiResult>(ApiResult.success(userNo), HttpStatus.OK);
-
 	}
-
-	
 }

@@ -38,7 +38,6 @@ public class UserRepository {
 	}
 
 	public List<User> findList(SearchInfo searchInfo) {
-	
 		return sqlSession.selectList("user.findList", searchInfo);
 	}
 	
