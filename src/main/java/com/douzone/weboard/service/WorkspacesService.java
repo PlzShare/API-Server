@@ -29,8 +29,6 @@ public class WorkspacesService {
 	public void insert(Workspaces workspace) {
 		
 		WorkspaceUsers workspaceUsers = new WorkspaceUsers();
-
-		System.out.println("넘어옴" + workspace);
 		workspace.setUserNo(workspace.getUserNums().get(0));
 		workspacesRepository.insert(workspace);
 		
@@ -40,13 +38,11 @@ public class WorkspacesService {
 		workspaceUsers.setUserNo(userNo);
 		workspaceUsers.setWorkspaceNo(workspaceNo);
 		
-		System.out.println("inviteAdmin에 들어갈 것:" + workspaceUsers);
 		workspaceUsersRepository.inviteAdmin(workspaceUsers);		
 				
 		for(int i=1; i<workspace.getUserNums().size(); i++) {
 			// UserNums에서 하나씩 추출해서 번호만 바뀌면서 새로 추가
 			workspaceUsers.setUserNo(workspace.getUserNums().get(i));
-			System.out.println("inviteUser에 들어갈 것:" + workspaceUsers);
 			workspaceUsersRepository.inviteUser(workspaceUsers);
 		}	
 

@@ -23,6 +23,7 @@ import com.douzone.weboard.vo.Channel;
 @RestController  // responsebody 생략가능
 @RequestMapping("/workspaces/{wno}/channels")
 public class ChannelController {
+	
 	@Autowired
 	private ChannelService channelService;
 	

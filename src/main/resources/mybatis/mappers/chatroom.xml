@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="chatroom">
+
+	<select id="findList" parameterType="long" resultType="chatroom">
+		<![CDATA[
+		select no, name, workspace_no 
+		from chatroom 
+		where workspace_no = #{workspaceNo};
+		]]>
+	</select>
+	
+	<insert id="insert" parameterType="chatroom" useGeneratedKeys="true" keyProperty="no">
+		<![CDATA[
+		insert into chatroom(name, workspace_no)
+		value (#{name}, #{workspaceNo});
+		]]>
+	</insert>
+	
+</mapper>

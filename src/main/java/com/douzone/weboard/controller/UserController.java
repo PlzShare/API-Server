@@ -126,10 +126,6 @@ public class UserController {
 	public ResponseEntity<ApiResult> checkUser(
 			@RequestBody User user){
 		Long userNo = userService.checkUser(user.getId());
-		System.out.println(userNo);		
 		return new ResponseEntity<ApiResult>(ApiResult.success(userNo), HttpStatus.OK);
-
 	}
-
-	
 }
