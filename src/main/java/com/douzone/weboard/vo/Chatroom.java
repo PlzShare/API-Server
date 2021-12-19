@@ -16,18 +16,9 @@ import lombok.ToString;
 //@RequiredArgsConstructor // final이 붙은 필요한 생성자만 만들겠다.
 @Builder // 빌더 사용
 @ToString // 투스트링 사용
-public class WorkspaceUsers {
-	private Long userNo;
+public class Chatroom {
+	private Long no;
+	private String name;
 	private Long workspaceNo;
-	private String inviteDate;
-	private String regDate;
-	private String role;
-	
-	
-	private String userid;
-	private String nickname;
 	private List<Long> userNums;
-	
-	private Long notiNo;
-	
 }

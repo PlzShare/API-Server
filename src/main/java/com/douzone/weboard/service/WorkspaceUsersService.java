@@ -45,27 +45,26 @@ public class WorkspaceUsersService {
 	
 	public void inviteUser(Workspaces workspaces) {
 		WorkspaceUsers workspaceUsers = new WorkspaceUsers();
-		System.out.println(workspaces + "으아아아아앙ㅇ아아악");
-		
-		// 알림 서비스
 		Noti noti = new Noti();
 		NotiUser notiUser = new NotiUser();
 		
 		workspaceUsers.setWorkspaceNo(workspaces.getNo());
-		workspaces.getUserNums().forEach((userNo) -> {
-			workspaceUsers.setUserNo(userNo);
-			workspaceUsersRepository.inviteUser(workspaceUsers);
-			
-		});
-		
-		
+		workspaceUsers.setUserNums(workspaces.getUserNums());
+		if(workspaceUsers.getUserNums().size() != 0) {
+			workspaceUsers.getUserNums().forEach((userNo) -> {
+				workspaceUsers.setUserNo(userNo);
+				workspaceUsersRepository.inviteUser(workspaceUsers);
+			});
+			}else {
+				return;
+			}
 		
 		noti.setType("invite");
 		noti.setWorkspaceNo(workspaces.getNo());
 		
-		noti.setContents(workspaces.getInviteMember() + "님이 " 
-					+ (workspacesRepository.find(workspaces.getNo()).getName())
-					+ " 워크스페이스로 초대하셨습니다.");
+		noti.setContents(workspaces.getInviteMember() + "님이 "
+				+ ((workspacesRepository.find(workspaces.getNo()).getName()))
+						+ " 워크스페이스로 초대하셨습니다.");
 		noti.setSender(workspaces.getUserNo());
 		
 		notiRepository.insertNoti(noti);
@@ -75,11 +74,19 @@ public class WorkspaceUsersService {
 			notiUser.setSendTo(userNo);
 			notiRepository.insertNotiUser(notiUser);
 		});
+
 		
 		
 	}
 
 	public void changeRole(ChangeUser chUser) {
 		workspaceUsersRepository.changeRole(chUser);
+	}
+	
+	public void changeDate(WorkspaceUsers workspaceUsers) {
+		NotiUser notiUser = new NotiUser();
+		workspaceUsersRepository.changeDate(workspaceUsers);
+		notiUser.setNo(workspaceUsers.getNotiNo());
+		notiRepository.delete(notiUser);
 	}
 }

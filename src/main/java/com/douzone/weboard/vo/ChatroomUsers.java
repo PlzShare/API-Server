@@ -1,7 +1,5 @@
 package com.douzone.weboard.vo;
 
-import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,18 +14,7 @@ import lombok.ToString;
 //@RequiredArgsConstructor // final이 붙은 필요한 생성자만 만들겠다.
 @Builder // 빌더 사용
 @ToString // 투스트링 사용
-public class WorkspaceUsers {
+public class ChatroomUsers {
+	private Long chatroomNo;
 	private Long userNo;
-	private Long workspaceNo;
-	private String inviteDate;
-	private String regDate;
-	private String role;
-	
-	
-	private String userid;
-	private String nickname;
-	private List<Long> userNums;
-	
-	private Long notiNo;
-	
 }

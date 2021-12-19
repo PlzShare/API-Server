@@ -17,6 +17,7 @@ public class NotiRepository {
 	// 최초 발생 알림 (최초 발생 하나만)
 	public boolean insertNoti(Noti noti) {
 		int count = sqlSession.insert("noti.insertnoti", noti);
+		System.out.println("ㅁ눠우밍림ㄴ어림ㄴ어림ㄴ어림넝림아ㅓㄹ");
 		return count == 1;
 	}
 	
@@ -24,6 +25,7 @@ public class NotiRepository {
 	// 유저 별 알림 (중복 : 여러개)
 	public boolean insertNotiUser(NotiUser notiUser) {
 		int count  = sqlSession.insert("noti.insertnotiuser", notiUser);
+		System.out.println("ㅁ눠우밍림ㄴ어림ㄴ어림ㄴ어림넝림아ㅓㄹ222222222222");
 		return count == 1;
 	}
 	
