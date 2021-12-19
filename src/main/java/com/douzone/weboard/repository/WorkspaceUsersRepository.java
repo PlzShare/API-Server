@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.douzone.weboard.vo.ChangeUser;
 import com.douzone.weboard.vo.WorkspaceUsers;
@@ -42,5 +41,10 @@ public class WorkspaceUsersRepository {
 		int UACount = sqlSession.update("workspaceUsers.changeRoleUA", chUser);
 
 		return (AUCount * UACount) == 1;
+	}
+	
+	public boolean changeDate(WorkspaceUsers workspaceUsers) {
+		int count  = sqlSession.update("workspaceUsers.changeDate", workspaceUsers);
+		return count == 1;
 	}
 }

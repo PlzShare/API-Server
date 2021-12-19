@@ -1,5 +1,7 @@
 package com.douzone.weboard.vo;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,4 +24,10 @@ public class Document {
 	private Boolean isPinned;
 	private Long userNo;
 	private Long channelNo;
+	
+	// noti
+	private List<Long> userNums;
+	private String nickname;
+	private Long makeUser;
+	private Long workspaceNo;
 }

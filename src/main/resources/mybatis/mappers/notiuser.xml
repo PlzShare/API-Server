@@ -3,11 +3,24 @@
 <mapper namespace="notiuser">
 	<select id="findNoti" parameterType="Long" resultType="map">
 		<![CDATA[
-			    select a.contents as contents, c.name as name
+			    select a.contents as contents, c.name as name, a.workspace_no as workspaceNo, b.no
 					from noti a, noti_user b, workspace c
 				    where a.no = b.noti_no
 				    and c.no = a.workspace_no
 					and b.send_to = #{sendTo }
+					and (a.type = "invite" || a.type = "workspace")
+				    order by b.no desc
+		]]>
+	</select>
+	
+	<select id="findNoti2" parameterType="Long" resultType="map">
+		<![CDATA[
+			    select a.contents as contents, c.name as name, a.workspace_no as workspaceNo, b.no
+					from noti a, noti_user b, workspace c
+				    where a.no = b.noti_no
+				    and c.no = a.workspace_no
+					and b.send_to = #{sendTo }
+					and (a.type = "channel" || a.type = "doc" || a.type = "chatroom")
 				    order by b.no desc
 		]]>
 	</select>
