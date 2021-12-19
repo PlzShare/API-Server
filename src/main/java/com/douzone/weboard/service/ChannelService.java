@@ -10,6 +10,7 @@ import com.douzone.weboard.vo.Channel;
 
 @Service
 public class ChannelService {
+	
 	@Autowired
 	private ChannelRepository channelRepository;
 	

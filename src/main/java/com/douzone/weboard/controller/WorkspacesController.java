@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.douzone.weboard.service.WorkspaceUsersService;
 import com.douzone.weboard.service.WorkspacesService;
 import com.douzone.weboard.util.ApiResult;
+import com.douzone.weboard.util.AuthUser;
 import com.douzone.weboard.vo.ChangeUser;
+import com.douzone.weboard.vo.User;
 import com.douzone.weboard.vo.WorkspaceUsers;
 import com.douzone.weboard.vo.Workspaces;
 
@@ -34,10 +36,15 @@ public class WorkspacesController {
 	
 	// main
 	@GetMapping("")
-	public ResponseEntity<ApiResult> main(@RequestParam("userNo") Long uno){
-		List<Workspaces> list = workspacesService.findAll(uno);
+	public ResponseEntity<ApiResult> main(@AuthUser User authUser){
+		System.out.println("===============Workspace Get==========");
+		System.out.println(authUser);
+		
+		List<Workspaces> list = workspacesService.findAll(authUser.getNo());
+		System.out.println(list);
 		return new ResponseEntity<ApiResult>(ApiResult.success(list), HttpStatus.OK); // 리턴 여러개로 정상동작 / 오류동작으로 분기
 	}
+	
 	@GetMapping("/{wno}")
 	public ResponseEntity<ApiResult> getWorkspace(@PathVariable("wno") Long wno){
 		return new ResponseEntity<ApiResult>(ApiResult.success(workspacesService.find(wno)), HttpStatus.OK);
@@ -67,8 +74,7 @@ public class WorkspacesController {
 	}
 	
 	@GetMapping("/search")
-	public ResponseEntity<ApiResult> search(
-			@RequestParam Long userNo){
+	public ResponseEntity<ApiResult> search(@AuthUser User authUser){
 		
 		// 테스트용 키워드 입력.
 		String test_keyword = "";
@@ -102,12 +108,12 @@ public class WorkspacesController {
 	
 	@DeleteMapping("/workspace-users")
 	public ResponseEntity<ApiResult> leave(
-			@RequestParam Long uno, 
+			@AuthUser User authUser, 
 			@RequestParam Long wno){
 		
 		WorkspaceUsers workspaceUsers = 
 				WorkspaceUsers.builder()
-							  .userNo(uno)
+							  .userNo(authUser.getNo())
 							  .workspaceNo(wno)
 							  .build();
 		

@@ -2,6 +2,8 @@ package com.douzone.weboard.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -53,7 +55,7 @@ public class UserController {
 			return new ResponseEntity<ApiResult>(ApiResult.fail("id, password 불일치"),HttpStatus.UNAUTHORIZED);			
 		}
 		
-		
+		// get-token
 		RestTemplate restTemplate = new RestTemplate();
 		
 		ResponseEntity<String> entity = restTemplate.postForEntity(authServerUrl + "/get-token", login, String.class);
@@ -124,10 +126,6 @@ public class UserController {
 	public ResponseEntity<ApiResult> checkUser(
 			@RequestBody User user){
 		Long userNo = userService.checkUser(user.getId());
-		System.out.println(userNo);		
 		return new ResponseEntity<ApiResult>(ApiResult.success(userNo), HttpStatus.OK);
-
 	}
-
-	
 }
