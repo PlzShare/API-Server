@@ -35,6 +35,10 @@ public class WorkspaceUsersRepository {
 		return count == 1;
 	}
 	
+	public boolean deleteNotiUser(WorkspaceUsers workspaceUsers) {
+		int count = sqlSession.update("workspaceUsers.deleteNotiUser", workspaceUsers);
+		return count == 1;
+	}
 
 	public boolean changeRole(ChangeUser chUser) {
 		int AUCount = sqlSession.update("workspaceUsers.changeRoleAU", chUser);

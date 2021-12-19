@@ -30,6 +30,14 @@ public class NotiController {
 		return new ResponseEntity<ApiResult>(ApiResult.success(result), HttpStatus.OK);
 	}
 	
+	@GetMapping("/type")
+	public ResponseEntity<ApiResult> getTypeNoti(
+			@RequestParam("uno") Long uno,
+			@RequestParam("type") String type){
+		List<NotiUser> result = notiService.getTypeNoti(uno, type);
+		return new ResponseEntity<ApiResult>(ApiResult.success(result), HttpStatus.OK);
+	}
+	
 	
 	@DeleteMapping("")
 	public ResponseEntity<ApiResult> deleteNoti(@RequestParam Long no){
