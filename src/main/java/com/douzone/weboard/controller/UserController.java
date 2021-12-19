@@ -5,7 +5,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,9 +18,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.douzone.weboard.annotation.AuthUser;
 import com.douzone.weboard.service.FileuploadService;
 import com.douzone.weboard.service.UserService;
 import com.douzone.weboard.util.ApiResult;
@@ -30,6 +34,7 @@ import com.douzone.weboard.vo.User;
 public class UserController {
 	private final UserService userService;
 	private final FileuploadService FileuploadService;	
+	
 	@Value("${authServer.url}")
 	private String authServerUrl;
 	
@@ -73,8 +78,8 @@ public class UserController {
 	
 	// userNo 가져오기
 	@GetMapping("")
-	public ResponseEntity<ApiResult> getUser(@RequestParam Long uno){
-		User user = userService.getUser(uno);
+	public ResponseEntity<ApiResult> getUser(@AuthUser User authUser){
+		User user = userService.getUser(authUser.getNo());
 		if(user == null) {
 		return new ResponseEntity<ApiResult>(ApiResult.fail("없음"),HttpStatus.NOT_FOUND);
 		}
@@ -84,13 +89,16 @@ public class UserController {
 	// 회원정보 수정
 	@PutMapping("")
 	public ResponseEntity<ApiResult> update(
-			@RequestBody User user,
-			@RequestParam Long uno,
+			User user,
+			@AuthUser User authUser,
 			@RequestParam(value="file",required = false) MultipartFile file) {
 		
-		String url = FileuploadService.restoreImage(file, "/user/profile");
-		
-		user.setNo(uno);
+
+		System.out.println("UserController ---------------------------------------------------------");
+		System.out.println(authUser);
+		String url = FileuploadService.restoreImage(file, "/user/profile");		
+
+		user.setNo(authUser.getNo());
 		user.setProfile(url);
 		
 		String nickname = user.getNickname() == null? null : user.getNickname().trim();
@@ -98,17 +106,39 @@ public class UserController {
 
 		user.setNickname(nickname);
 		user.setPassword(password);
+		System.out.println("-0-9-07-0897690758967");
+		System.out.println(user);
+		if(userService.update(user)) {
+			if(nickname != null && !nickname.isEmpty()) {
+				authUser.setNickname(nickname);				
+			}
+			if(password != null && password.isEmpty()) {
+				authUser.setPassword(password);				
+			}
+			if(user.getProfile() != null && !user.getProfile().isEmpty()) {
+				authUser.setProfile(password);				
+			}
+			
+			
+			// get-token
+			RestTemplate restTemplate = new RestTemplate();
+			
+			ResponseEntity<String> entity = restTemplate.postForEntity(authServerUrl + "/get-token", authUser, String.class);
+			String token = entity.getHeaders().get("Authorization").get(0);
+					
+			return ResponseEntity.ok()
+					.header("Authorization", token)
+					.body(ApiResult.success(authUser));
+		}
 		
-		userService.update(user);
-		
-		return new ResponseEntity<ApiResult>(ApiResult.success(user),HttpStatus.OK);
+		return new ResponseEntity<ApiResult>(HttpStatus.BAD_REQUEST);
 	}
 	
 	// 회원탈퇴
 	@DeleteMapping("")
-	public ResponseEntity<ApiResult> delete(@RequestParam Long userNo){
+	public ResponseEntity<ApiResult> delete(@AuthUser User authUser){
 	
-		userService.delete(userNo);
+		userService.delete(authUser.getNo());
 		
 		return new ResponseEntity<ApiResult>(ApiResult.success(true),HttpStatus.OK);
 	}
