@@ -44,6 +44,7 @@ public class WebConfig implements WebMvcConfigurer {
 	@Override
 	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
 		// TODO Auto-generated method stub
+		System.out.println("Config000000000000000000000000000000000000000000000000000");
 		resolvers.add(new AuthUserArgumentResolver());
 	}
 

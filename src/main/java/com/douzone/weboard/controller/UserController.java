@@ -5,7 +5,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -90,8 +93,11 @@ public class UserController {
 			@AuthUser User authUser,
 			@RequestParam(value="file",required = false) MultipartFile file) {
 		
-		String url = FileuploadService.restoreImage(file, "/user/profile");
-		
+
+		System.out.println("UserController ---------------------------------------------------------");
+		System.out.println(authUser);
+		String url = FileuploadService.restoreImage(file, "/user/profile");		
+
 		user.setNo(authUser.getNo());
 		user.setProfile(url);
 		
@@ -100,10 +106,32 @@ public class UserController {
 
 		user.setNickname(nickname);
 		user.setPassword(password);
+		System.out.println("-0-9-07-0897690758967");
+		System.out.println(user);
+		if(userService.update(user)) {
+			if(nickname != null && !nickname.isEmpty()) {
+				authUser.setNickname(nickname);				
+			}
+			if(password != null && password.isEmpty()) {
+				authUser.setPassword(password);				
+			}
+			if(user.getProfile() != null && !user.getProfile().isEmpty()) {
+				authUser.setProfile(password);				
+			}
+			
+			
+			// get-token
+			RestTemplate restTemplate = new RestTemplate();
+			
+			ResponseEntity<String> entity = restTemplate.postForEntity(authServerUrl + "/get-token", authUser, String.class);
+			String token = entity.getHeaders().get("Authorization").get(0);
+					
+			return ResponseEntity.ok()
+					.header("Authorization", token)
+					.body(ApiResult.success(authUser));
+		}
 		
-		userService.update(user);
-		
-		return new ResponseEntity<ApiResult>(ApiResult.success(user),HttpStatus.OK);
+		return new ResponseEntity<ApiResult>(HttpStatus.BAD_REQUEST);
 	}
 	
 	// 회원탈퇴
