@@ -11,13 +11,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.douzone.weboard.annotation.AuthUser;
 import com.douzone.weboard.service.ChatService;
 import com.douzone.weboard.util.ApiResult;
 import com.douzone.weboard.vo.Chatroom;
 import com.douzone.weboard.vo.ChatroomUsers;
+import com.douzone.weboard.vo.User;
 import com.douzone.weboard.vo.WorkspaceUsers;
 
 @RestController
@@ -31,10 +32,10 @@ public class ChatController {
 	@GetMapping("")
 	public ResponseEntity<ApiResult> main(
 			@PathVariable("wno") Long wno,
-			@RequestParam Long uno) {
+			@AuthUser User authUser) {
 		
 		WorkspaceUsers workspaceUsers = new WorkspaceUsers();
-		workspaceUsers.setUserNo(uno);
+		workspaceUsers.setUserNo(authUser.getNo());
 		workspaceUsers.setWorkspaceNo(wno);
 		
 		List<Chatroom> list = chatService.findList(workspaceUsers);
