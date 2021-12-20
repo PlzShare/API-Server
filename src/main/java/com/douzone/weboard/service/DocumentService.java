@@ -13,6 +13,7 @@ import com.douzone.weboard.repository.NotiRepository;
 import com.douzone.weboard.vo.Document;
 import com.douzone.weboard.vo.Noti;
 import com.douzone.weboard.vo.NotiUser;
+import com.douzone.weboard.vo.User;
 import com.douzone.weboard.vo.WorkspaceUsers;
 
 import lombok.RequiredArgsConstructor;
@@ -47,8 +48,7 @@ public class DocumentService {
 		
 		noti.setContents(document.getNickname() + "님이 "
 							+ document.getTitle() + " 문서를 추가하셨습니다.");
-		noti.setSender(document.getMakeUser());
-		
+		noti.setSender(document.getUserNo());
 		notiRepository.insertNoti(noti);
 		
 		notiUser.setNotiNo(noti.getNo());
@@ -65,8 +65,11 @@ public class DocumentService {
 		return documentRepository.update(document);
 	}
 	
-	public boolean delete(Long no) {
-		return documentRepository.delete(no);
+	public boolean delete(Document doc) {
+		if(validate(doc)) {
+			return documentRepository.delete(doc.getNo());			
+		}
+		throw new RuntimeException("유효하지 않은 user로 부터 document 삭제");
 	}
 	
 	public Optional<Document> find(Long no) {
@@ -75,5 +78,9 @@ public class DocumentService {
 	
 	public List<Document> findAll(Document document){
 		return documentRepository.findAll(document);
+	}
+	
+	public boolean validate(Document doc) {
+		return documentRepository.validate(doc);
 	}
 }
