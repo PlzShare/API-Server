@@ -7,16 +7,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter // 게터
-@Setter // 세터
-@NoArgsConstructor // 빈 생성자를 만들겠다.
-@AllArgsConstructor // 전부 다 있는 생성자를 만들겠다.
-//@RequiredArgsConstructor // final이 붙은 필요한 생성자만 만들겠다.
-@Builder // 빌더 사용
-@ToString // 투스트링 사용
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@ToString
 public class ChangeUser {
 	private Long userNo;
 	private Long workspaceNo;
 	private Long adminNo;
-	
 }

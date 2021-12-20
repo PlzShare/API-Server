@@ -2,11 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="chatroom">
 
-	<select id="findList" parameterType="long" resultType="chatroom">
+	<select id="findList" parameterType="workspaceUsers" resultType="chatroom">
 		<![CDATA[
-		select no, name, workspace_no 
-		from chatroom 
-		where workspace_no = #{workspaceNo};
+		select no, name, workspace_no
+		from chatroom a join chatroot_user b on a.no = b.chatroom_no
+		where workspace_no = #{workspaceNo} and user_no=#{userNo};
 		]]>
 	</select>
 	
@@ -16,5 +16,5 @@
 		value (#{name}, #{workspaceNo});
 		]]>
 	</insert>
-	
+
 </mapper>

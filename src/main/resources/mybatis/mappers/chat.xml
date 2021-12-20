@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="chat">
+
+	<select id="findChatList" parameterType="long" resultType="chat">
+		<![CDATA[
+		select a.no as no, 
+			   b.name as user_name,
+			   a.contents as contents,
+			   a.created_at as created_at,
+			   a.user_no as user_no,
+			   a.chatroom_no as chatroom_no
+			   
+		from chat a join user b on a.user_no = b.no
+		where chatroom_no = #{chatroomNo}
+		order by created_at asc;
+		]]>
+	</select>
+
+</mapper>
