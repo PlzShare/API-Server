@@ -12,7 +12,7 @@
 
 	<select id="findinviteNoti" parameterType="Long" resultType="map">
 		<![CDATA[
-			    select a.contents as contents, c.name as name, a.workspace_no as workspaceNo, b.no
+			     select a.contents as contents, c.name as name, a.workspace_no as workspaceNo, b.no , a.sender as sender
 					from noti a, noti_user b, workspace c
 				    where a.no = b.noti_no
 				    and c.no = a.workspace_no
@@ -24,13 +24,12 @@
 	
 	<select id="findTypeNoti" parameterType="map" resultType="map">
 		<![CDATA[
-			    select a.contents as contents, c.name as name, a.workspace_no as workspaceNo, b.no
-					from noti a, noti_user b, workspace c
-				    where a.no = b.noti_no
-				    and c.no = a.workspace_no
-					and b.send_to = #{sendTo }
-					and a.type = #{type }
-				    order by b.no desc
+			 select n.contents as contents, w.name as name, n.workspace_no as workspaceNo, nu.no, n.sender, sender.profile
+					    from noti n join noti_user nu on n.no = nu.noti_no
+									join workspace w on n.workspace_no = w.no
+					                join user sender on n.sender = sender.no
+						where nu.send_to = #{sendTo }
+							and n.type = #{type }
 		]]>
 	</select>
 

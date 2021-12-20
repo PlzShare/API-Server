@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.douzone.weboard.repository.NotiRepository;
+import com.douzone.weboard.repository.UserRepository;
 import com.douzone.weboard.vo.NotiUser;
 
 @Service
