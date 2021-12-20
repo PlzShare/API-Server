@@ -23,7 +23,6 @@
 		]]>
 	</insert>
 	 
-	<!-- 미완성 -->
 	<delete id="leave" parameterType="workspaceUsers">
 		<![CDATA[
 			delete from workspace_user where user_no = #{userNo}

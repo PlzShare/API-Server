@@ -21,5 +21,4 @@ public class Chatroom {
 	private String name;
 	private Long workspaceNo;
 	private List<Long> userNums;
-
 }
