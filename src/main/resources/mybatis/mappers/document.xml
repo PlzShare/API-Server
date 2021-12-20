@@ -37,4 +37,10 @@
 		from document
 		where no = #{no}
 	</select>
+	<select id="validate" parameterType="document" resultType="boolean">
+		select if(count(*) > 0, true, false)
+		from document
+		where user_no = #{userNo}
+			and no = #{no}
+	</select>
 </mapper>
