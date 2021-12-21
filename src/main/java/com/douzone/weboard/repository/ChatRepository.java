@@ -33,4 +33,5 @@ public class ChatRepository {
 		int count = sqlSession.delete("chatroom.leave", chatroomUsers);
 		return count == 1;
 	}
+	
 }

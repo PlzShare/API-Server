@@ -22,5 +22,4 @@ public class User {
 	private String regDate;
 	private String leaveDate;
 	private String profile;
-	
 }
