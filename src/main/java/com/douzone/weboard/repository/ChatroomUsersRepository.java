@@ -1,5 +1,7 @@
 package com.douzone.weboard.repository;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -17,5 +19,8 @@ public class ChatroomUsersRepository {
 		return count == 1;
 	}
 
+	public List<ChatroomUsers> findChatMembers(Long chatroomNo) {
+		return sqlSession.selectList("chatroomUsers.findChatMembers", chatroomNo);
+	}
 }
 

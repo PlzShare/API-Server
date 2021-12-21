@@ -16,5 +16,12 @@
 		value (#{name}, #{workspaceNo});
 		]]>
 	</insert>
-
+	
+	<delete id="leave" parameterType="chatroomUsers">
+		<![CDATA[
+		delete from chatroot_user
+		where chatroom_no=#{chatroomNo} and user_no=#{userNo}
+		]]>
+	</delete>
+	
 </mapper>
