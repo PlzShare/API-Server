@@ -44,4 +44,8 @@ public class UserRepository {
 	public Long checkUser(String userId) {
 		return sqlSession.selectOne("user.checkUser", userId);
 	}
+
+	public String findPassword(String id) {
+		return sqlSession.selectOne("user.findPassword", id );
+	}
 }

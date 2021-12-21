@@ -13,7 +13,7 @@
 		<![CDATA[
 		select no, id, name, nickname, profile 
 		from user 
-		where id=#{id } and password=#{password }
+		where id=#{id }
 		]]>
 	</select>
 	
@@ -53,7 +53,7 @@
 		<![CDATA[
 			select no, id 
 			from user 
-			where id=#{userId}
+			where id=#{userId }
 		]]>
 		
 	</select>
@@ -62,7 +62,15 @@
 		<![CDATA[
 			select no
 			from user 
-			where id=#{userId}
+			where id=#{userId }
+		]]>
+	</select>
+	
+	<select id="findPassword" parameterType="String" resultType="String">
+		<![CDATA[
+			select password 
+			from user
+			where id =#{id }
 		]]>
 	</select>
 	
