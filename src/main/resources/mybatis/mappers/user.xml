@@ -41,6 +41,11 @@
 		where no=#{no }
 	</update>
 	
+	<update id="updateprofile" parameterType="user">
+		update user set profile = '/upload-images/user/profile/profile.jpg'
+				where no = #{no }
+	</update>
+	
 	<update id="delete" parameterType="long">
 		<![CDATA[
 		update user 

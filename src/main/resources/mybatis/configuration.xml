@@ -14,6 +14,7 @@
     	<typeAlias type="com.douzone.weboard.vo.Channel" alias="channel"/>
 		<typeAlias type="com.douzone.weboard.vo.Noti" alias="noti"/>
 		<typeAlias type="com.douzone.weboard.vo.NotiUser" alias="notiuser"/>
+		<typeAlias type="com.douzone.weboard.vo.Content" alias="content"/>
 		<typeAlias type="com.douzone.weboard.vo.User" alias="User" />
 		<typeAlias type="com.douzone.weboard.vo.SearchInfo" alias="searchInfo" />
 		<typeAlias type="com.douzone.weboard.vo.Document" alias="document" />

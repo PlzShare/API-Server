@@ -7,9 +7,17 @@
 				from workspace_user a, user b
 				where a.user_no = b.no
 				and a.workspace_no = #{workspaceNo}
+				and a.reg_date != '9999-12-31 00:00:00'
 				order by b.id desc
 		]]>
 	</select>
+	
+	<select id="findUserList" parameterType="Long" resultType="Long">
+		<![CDATA[
+			select user_no from workspace_user where workspace_no=#{workspaceNo }
+		]]>
+	</select>
+	
 	
 	<insert id="inviteAdmin" parameterType="workspaceUsers">
 		<![CDATA[

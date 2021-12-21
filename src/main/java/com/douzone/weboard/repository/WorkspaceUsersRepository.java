@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.douzone.weboard.vo.ChangeUser;
+import com.douzone.weboard.vo.Content;
 import com.douzone.weboard.vo.WorkspaceUsers;
 
 @Repository
@@ -17,6 +18,10 @@ public class WorkspaceUsersRepository {
 	
 	public List<WorkspaceUsers> findUser(Long wno){
 		return sqlSession.selectList("workspaceUsers.findUser", wno);
+	}
+	
+	public List<Long> findUserList(Long wno){
+		return sqlSession.selectList("workspaceUsers.findUserList", wno);
 	}
 	
 	public boolean inviteAdmin(WorkspaceUsers workspaceUsers) {

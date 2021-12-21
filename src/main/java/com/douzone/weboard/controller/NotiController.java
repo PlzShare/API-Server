@@ -31,6 +31,8 @@ public class NotiController {
 		return new ResponseEntity<ApiResult>(ApiResult.success(result), HttpStatus.OK);
 	}
 	
+	
+	
 	@GetMapping("/type")
 	public ResponseEntity<ApiResult> getTypeNoti(
 			@RequestParam("uno") Long uno,
