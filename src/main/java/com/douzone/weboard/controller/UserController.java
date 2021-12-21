@@ -56,6 +56,7 @@ public class UserController {
 	public ResponseEntity<ApiResult> login(@RequestBody User user){
 		User login = userService.login(user);		
 		
+		
 		if(login == null) {
 			return new ResponseEntity<ApiResult>(ApiResult.fail("id, password 불일치"),HttpStatus.UNAUTHORIZED);			
 		}
@@ -75,6 +76,9 @@ public class UserController {
 				.header("Authorization", token)
 				.body(ApiResult.success(login));
 	}
+	
+	
+	
 	
 	// userNo 가져오기
 	@GetMapping("")

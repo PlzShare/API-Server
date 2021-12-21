@@ -14,7 +14,7 @@
 		<![CDATA[
 			     select a.contents as contents, c.name as name, a.workspace_no as workspaceNo, b.no , a.sender as sender
 					from noti a, noti_user b, workspace c
-				    where a.no = b.noti_no
+				    where a.no = b.noti_nou          
 				    and c.no = a.workspace_no
 					and b.send_to = #{sendTo }
 					and (a.type = "invite" || a.type = "workspace")
