@@ -36,7 +36,6 @@ public class ChatService {
 			chatroomUsers.setUserNo(userNo);
 			chatroomUsersRepository.insert(chatroomUsers);
 		});
-
 	}
 
 	public List<Chatroom> findChatList(Long ctno) {
@@ -45,5 +44,18 @@ public class ChatService {
 
 	public void leave(ChatroomUsers chatroomUsers) {
 		chatRepository.leave(chatroomUsers);
+	}
+	
+	public void invite(ChatroomUsers chatroomUsers) {
+		chatroomUsers.getUserNums().forEach((userNo) -> {
+			chatroomUsers.setUserNo(userNo);
+			System.out.println(chatroomUsers);
+			chatroomUsersRepository.insert(chatroomUsers);
+		});
+	}
+
+	public List<ChatroomUsers> findChatMembers(Long ctno) {
+		System.out.println(ctno);
+		return chatroomUsersRepository.findChatMembers(ctno);
 	}
 }

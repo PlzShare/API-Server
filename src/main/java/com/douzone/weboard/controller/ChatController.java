@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.douzone.weboard.annotation.AuthUser;
@@ -41,7 +42,7 @@ public class ChatController {
 		List<Chatroom> list = chatService.findList(workspaceUsers);
 		return new ResponseEntity<ApiResult>(ApiResult.success(list), HttpStatus.OK);
 	}
-
+	
 	@PostMapping("")
 	public ResponseEntity<ApiResult> insert(@RequestBody Chatroom chatroom) {
 		chatService.insert(chatroom);
@@ -49,15 +50,40 @@ public class ChatController {
 	}
 
 	@DeleteMapping("")
-	public ResponseEntity<ApiResult> leave(@RequestBody ChatroomUsers chatroomUsers){
+	public ResponseEntity<ApiResult> leave(
+			@AuthUser User authUser,
+			@RequestParam Long ctno){
+		ChatroomUsers chatroomUsers = new ChatroomUsers();
+		chatroomUsers.setChatroomNo(ctno);
+		chatroomUsers.setUserNo(authUser.getNo());
 		chatService.leave(chatroomUsers);
 		return new ResponseEntity<ApiResult>(HttpStatus.OK);
 	}
-
+	
+	/////////////////////////////////////////////////////////////////////////////////////////
+	
 	// 각 방들의 채팅내역
 	@GetMapping("/{ctno}")
 	public ResponseEntity<ApiResult> chatMain(@PathVariable("ctno") Long ctno) {
 		List<Chatroom> list = chatService.findChatList(ctno);
+		return new ResponseEntity<ApiResult>(ApiResult.success(list), HttpStatus.OK);
+	}
+	
+	// 초대
+	@PostMapping("/{ctno}")
+	public ResponseEntity<ApiResult> invite(
+			@RequestBody ChatroomUsers chatroomUsers) {
+		chatService.invite(chatroomUsers);
+		return new ResponseEntity<ApiResult>(ApiResult.success(chatroomUsers),HttpStatus.OK);	
+	}
+	
+	// 특정 방의 구성원들을 불러옴
+	@GetMapping("/{ctno}/findChatMembers")
+	public ResponseEntity<ApiResult> findChatMembers(
+			@PathVariable("ctno") Long ctno){
+		System.out.println("===========================");
+		System.out.println("채팅방 번호" + ctno);
+		List<ChatroomUsers> list = chatService.findChatMembers(ctno);
 		return new ResponseEntity<ApiResult>(ApiResult.success(list), HttpStatus.OK);
 	}
 	
