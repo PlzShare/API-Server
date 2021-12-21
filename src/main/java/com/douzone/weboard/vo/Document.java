@@ -24,6 +24,7 @@ public class Document {
 	private Boolean isPinned;
 	private Long userNo;
 	private Long channelNo;
+	private Long version;
 	
 	// noti
 	private List<Long> userNums;
