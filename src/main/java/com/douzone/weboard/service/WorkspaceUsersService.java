@@ -32,6 +32,12 @@ public class WorkspaceUsersService {
 		
 		return workspaceUserList;
 	}
+	
+	public List<Long> getUserList(Long wno) {
+		List<Long> UserNoList = workspaceUsersRepository.findUserList(wno);
+
+		return UserNoList;
+	}
 
 	public void leave(WorkspaceUsers workspaceUsers) {
 		System.out.println("떠난 사람(어드먼일때 고려할 것):" + workspaceUsers);

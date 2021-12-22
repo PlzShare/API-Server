@@ -49,6 +49,8 @@ public class ChannelService {
 							+ channel.getName() + " 채널을 추가하셨습니다.");
 		noti.setSender(channel.getMakeUser());
 		
+		System.out.println(noti + "우에에에에에엥에에에에에ㅔ에에에에에ㅔ에엥!!");
+		
 		notiRepository.insertNoti(noti);
 		
 		notiUser.setNotiNo(noti.getNo());
@@ -56,6 +58,8 @@ public class ChannelService {
 			notiUser.setSendTo(userNo);
 			notiRepository.insertNotiUser(notiUser);
 		});
+		
+		System.out.println(notiUser + "우에에에에에엥에에에에에ㅔ에에에에에ㅔ에엥!!");
 		
 		return channelRepository.insert(channel);
 	}
