@@ -19,6 +19,7 @@
 		<typeAlias type="com.douzone.weboard.vo.SearchInfo" alias="searchInfo" />
 		<typeAlias type="com.douzone.weboard.vo.Document" alias="document" />
 		<typeAlias type="com.douzone.weboard.vo.ChangeUser" alias="changeUser" />
+		<typeAlias type="com.douzone.weboard.vo.Chat" alias="chat" />
 		<typeAlias type="com.douzone.weboard.vo.Chatroom" alias="chatroom" />
 		<typeAlias type="com.douzone.weboard.vo.ChatroomUsers" alias="chatroomUsers" />
 	</typeAliases>
@@ -31,6 +32,7 @@
 		<mapper resource="mybatis/mappers/document.xml" />
 		<mapper resource="mybatis/mappers/workspaces.xml" />
 		<mapper resource="mybatis/mappers/workspaceUsers.xml" />
+		<mapper resource="mybatis/mappers/chat.xml" />
 		<mapper resource="mybatis/mappers/chatroom.xml" />
 		<mapper resource="mybatis/mappers/chatroomUsers.xml" />
 	</mappers>

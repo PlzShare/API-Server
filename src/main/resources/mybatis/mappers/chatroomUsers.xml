@@ -2,11 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="chatroomUsers">
 
+	<select id="findChatMembers" parameterType="long" resultType="ChatroomUsers">
+		<![CDATA[
+		select chatroom_no, user_no
+		from chatroot_user
+		where chatroom_no=#{chatroomNo};
+		]]>
+	</select>
+
 	<insert id="insert" parameterType="chatroomUsers">
 		<![CDATA[
 		insert into chatroot_user(user_no, chatroom_no)
 		value (#{userNo}, #{chatroomNo});
 		]]>
 	</insert>
+		 
+	<delete id="leave" parameterType="chatroomUsers">
+		<![CDATA[
+		delete from chatroot_user
+		where chatroom_no=#{chatroomNo} and user_no=#{userNo};
+		]]>
+	</delete>
 	
 </mapper>

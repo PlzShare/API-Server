@@ -18,7 +18,6 @@ public class WorkspaceUsersRepository {
 	
 	public List<WorkspaceUsers> findUser(Long wno){
 		return sqlSession.selectList("workspaceUsers.findUser", wno);
-//				("workspaceUsers.findUser", wno);
 	}
 	
 	public List<Long> findUserList(Long wno){

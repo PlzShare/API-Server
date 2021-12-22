@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.douzone.weboard.service.NotiService;
 import com.douzone.weboard.util.ApiResult;
 import com.douzone.weboard.vo.NotiUser;
+import com.douzone.weboard.vo.User;
 
 @RestController
 @RequestMapping("/noti")
@@ -35,7 +36,8 @@ public class NotiController {
 	@GetMapping("/type")
 	public ResponseEntity<ApiResult> getTypeNoti(
 			@RequestParam("uno") Long uno,
-			@RequestParam("type") String type){
+			@RequestParam("type") String type
+			){
 		List<NotiUser> result = notiService.getTypeNoti(uno, type);
 		return new ResponseEntity<ApiResult>(ApiResult.success(result), HttpStatus.OK);
 	}

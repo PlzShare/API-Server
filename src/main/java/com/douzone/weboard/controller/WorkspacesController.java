@@ -38,10 +38,10 @@ public class WorkspacesController {
 	@GetMapping("")
 	public ResponseEntity<ApiResult> main(@AuthUser User authUser){
 		System.out.println("===============Workspace Get==========");
-		System.out.println(authUser);
+		System.out.println("어스유저 : " + authUser);
 		
 		List<Workspaces> list = workspacesService.findAll(authUser.getNo());
-		System.out.println(list);
+		System.out.println("리스트 : " + list);
 		return new ResponseEntity<ApiResult>(ApiResult.success(list), HttpStatus.OK); // 리턴 여러개로 정상동작 / 오류동작으로 분기
 	}
 	
@@ -67,8 +67,9 @@ public class WorkspacesController {
 	// delete
 	@DeleteMapping("")
 	public ResponseEntity<ApiResult> delete(
-			@RequestParam Long wno){
-		// 워크스페이스 관리자가 워크스페이스 삭제 가능
+			@RequestParam Long wno, 
+			@AuthUser User authUser){
+
 		workspacesService.delete(wno);
 		return new ResponseEntity<ApiResult>(HttpStatus.OK);
 	}
@@ -111,6 +112,8 @@ public class WorkspacesController {
 			@AuthUser User authUser, 
 			@RequestParam Long wno){
 		
+		System.out.println("떠난 사람:" + authUser);
+		
 		WorkspaceUsers workspaceUsers = 
 				WorkspaceUsers.builder()
 							  .userNo(authUser.getNo())
@@ -136,9 +139,10 @@ public class WorkspacesController {
 	
 	@PutMapping("/workspace-users/change-role")
 	public ResponseEntity<ApiResult> changeRole(
-
+			@AuthUser User authUser,
 			@RequestBody ChangeUser changeUser){
-		
+		changeUser.setAdminNo(authUser.getNo());
+		System.out.println(changeUser);
 		workspaceUsersService.changeRole(changeUser);
 		return new ResponseEntity<ApiResult>(HttpStatus.OK);
 	}

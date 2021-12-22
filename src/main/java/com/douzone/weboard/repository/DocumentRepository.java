@@ -15,4 +15,5 @@ public interface DocumentRepository {
 	public boolean delete(Long no);
 	public Optional<Document> find(Long no);
 	public List<Document> findAll(Document document);
+	public boolean validate(Document doc);
 }

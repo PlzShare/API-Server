@@ -46,9 +46,8 @@ public class DocumentController {
 	
 	@PostMapping("")
 	public ResponseEntity<ApiResult> insert(@RequestBody Document doc, @AuthUser User authUser){	
-		authUser.setNo(2L);
 		doc.setUserNo(authUser.getNo());
-		System.out.println(doc);
+		doc.setNickname(authUser.getNickname());
 		boolean result = documentService.add(doc);		
 		
 		ResponseEntity<ApiResult> response = result? new ResponseEntity<>(ApiResult.success(true), HttpStatus.OK)
@@ -69,8 +68,9 @@ public class DocumentController {
 	}
 	
 	@DeleteMapping("/{docNo}")
-	public ResponseEntity<ApiResult> update(@PathVariable("docNo") Long docNo){	
-		boolean result = documentService.delete(docNo);
+	public ResponseEntity<ApiResult> update(@PathVariable("docNo") Long docNo, @AuthUser User authUser){
+		Document doc = Document.builder().no(docNo).userNo(authUser.getNo()).build();
+		boolean result = documentService.delete(doc);
 		
 		ResponseEntity<ApiResult> response = result? new ResponseEntity<>(ApiResult.success(true), HttpStatus.OK)
 				: new ResponseEntity<>(ApiResult.fail("삭제 실패"), HttpStatus.BAD_REQUEST);

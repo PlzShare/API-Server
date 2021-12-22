@@ -1,7 +1,5 @@
 package com.douzone.weboard.vo;
 
-import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,8 +13,11 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @ToString
-public class ChatroomUsers {
-	private Long chatroomNo;
+public class Chat {
+	private Long no;
 	private Long userNo;
-	private List<Long> userNums;
+	private Long chatroomNo;
+	private String userName;
+	private String contents;
+	private String createdAt;
 }
