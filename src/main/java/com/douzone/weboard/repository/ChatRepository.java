@@ -20,6 +20,7 @@ public class ChatRepository {
 		return sqlSession.selectList("chatroom.findList", workspaceUsers);
 	}
 
+
 	public boolean insert(Chatroom chatroom) {
 		int count = sqlSession.insert("chatroom.insert", chatroom);
 		return count == 1;

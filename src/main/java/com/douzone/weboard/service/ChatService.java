@@ -26,6 +26,11 @@ public class ChatService {
 	public List<Chatroom> findList(WorkspaceUsers workspaceUsers) {
 		return chatRepository.findList(workspaceUsers);
 	}
+	
+	// Noti서버로 보내기위한 서비스
+	public List<Long> findChatUserList(Long cno) {
+		return chatroomUsersRepository.findChatUserList(cno);
+	}
 
 	public void insert(Chatroom chatroom) {
 		ChatroomUsers chatroomUsers = new ChatroomUsers();

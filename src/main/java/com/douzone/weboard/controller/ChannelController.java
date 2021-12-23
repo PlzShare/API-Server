@@ -56,7 +56,7 @@ public class ChannelController {
 			}
 		}
 
-		String message = authUser.getNickname() + "님이" + channel.getName() + "채널을 추가하셨습니다.";
+		String message = authUser.getNickname() + "님이 [ " + channel.getName() + " ] 채널을 추가하셨습니다.";
 		
 		NotiType notiType = new NotiType();
 		notiType.setMemberList(notifyList);

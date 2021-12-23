@@ -10,6 +10,7 @@
 		]]>
 	</select>
 	
+	
 	<insert id="insert" parameterType="chatroom" useGeneratedKeys="true" keyProperty="no">
 		<![CDATA[
 		insert into chatroom(name, workspace_no)
