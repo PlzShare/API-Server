@@ -87,4 +87,12 @@ public class ChatController {
 		return new ResponseEntity<ApiResult>(ApiResult.success(list), HttpStatus.OK);
 	}
 	
+	// Noti 서버로 보내기위한 채팅방 유저 리스트
+	@GetMapping("/noti/{cno}")
+	public ResponseEntity<ApiResult> getMemberList(@PathVariable("cno") Long cno){
+		List<Long> UserList = chatService.findChatUserList(cno);
+		System.out.println(UserList + "항힝ㅎ민얼미나ㅓㅇ림넝림ㄴ어림어히멍힘나어림아");
+		return new ResponseEntity<ApiResult>(ApiResult.success(UserList), HttpStatus.OK);
+	}
+	
 }

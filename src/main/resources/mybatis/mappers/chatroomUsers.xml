@@ -9,6 +9,12 @@
 		where chatroom_no=#{chatroomNo};
 		]]>
 	</select>
+	
+	<select id="findChatUserList" parameterType="Long" resultType="Long">
+		<![CDATA[
+		select user_no from chatroot_user where chatroom_no=#{chatroomNo }
+		]]>
+	</select>
 
 	<insert id="insert" parameterType="chatroomUsers">
 		<![CDATA[

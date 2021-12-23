@@ -18,6 +18,10 @@ public class ChatroomUsersRepository {
 		int count = sqlSession.insert("chatroomUsers.insert", chatroomUsers);
 		return count == 1;
 	}
+	
+	public List<Long> findChatUserList(Long cno) {
+		return sqlSession.selectList("chatroomUsers.findChatUserList", cno);
+	}
 
 	public List<ChatroomUsers> findChatMembers(Long chatroomNo) {
 		return sqlSession.selectList("chatroomUsers.findChatMembers", chatroomNo);
